@@ -44,6 +44,10 @@ h1 { font-size: 24px; margin: 8px 0 4px; }
 table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
 th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--grid); }
 th { color: var(--ink2); font-weight: 600; font-size: 13px; }
+th[data-s] { cursor: pointer; user-select: none; white-space: nowrap; }
+th[data-s]::after { content: " ⇅"; color: var(--muted); font-size: 11px; }
+th[data-s][data-dir="asc"]::after { content: " ▲"; color: var(--ink); }
+th[data-s][data-dir="desc"]::after { content: " ▼"; color: var(--ink); }
 td.bad { color: var(--crit); font-weight: 700; }
 .note { color: var(--ink2); font-size: 13px; }
 a { color: var(--s1); }
@@ -61,7 +65,7 @@ limite conform Ordin ANRE 46/2021, art. 25: 207–253 V (95%), absolut 195,5–2
     <div class="l">minim înregistrat — faza L2, 14.08 10:09</div></div>
   <div class="tile"><div class="v bad">262,2 V</div>
     <div class="l">maxim înregistrat — faza L3, 13.08 17:49</div></div>
-  <div class="tile"><div class="v">29 / 319</div>
+  <div class="tile"><div class="v">29 / 325</div>
     <div class="l">valori de fază în afara limitelor (9%)</div></div>
 </div>
 
@@ -88,343 +92,349 @@ limite conform Ordin ANRE 46/2021, art. 25: 207–253 V (95%), absolut 195,5–2
 <text x="806" y="67.6" class="lim">253 V</text>
 <line x1="52" y1="224.6" x2="800" y2="224.6" stroke="var(--crit)" stroke-width="1.5" stroke-dasharray="6 4"/>
 <text x="806" y="228.6" class="lim crit-t">195,5 V</text>
-<line x1="105.3" y1="380" x2="105.3" y2="385" stroke="var(--axis)" stroke-width="1"/>
-<text x="105.3" y="400" text-anchor="middle" class="tick">13.08 03:00</text>
-<line x1="231.7" y1="380" x2="231.7" y2="385" stroke="var(--axis)" stroke-width="1"/>
-<text x="231.7" y="400" text-anchor="middle" class="tick">13.08 09:00</text>
-<line x1="358.1" y1="380" x2="358.1" y2="385" stroke="var(--axis)" stroke-width="1"/>
-<text x="358.1" y="400" text-anchor="middle" class="tick">13.08 15:00</text>
-<line x1="484.5" y1="380" x2="484.5" y2="385" stroke="var(--axis)" stroke-width="1"/>
-<text x="484.5" y="400" text-anchor="middle" class="tick">13.08 21:00</text>
-<line x1="610.9" y1="380" x2="610.9" y2="385" stroke="var(--axis)" stroke-width="1"/>
-<text x="610.9" y="400" text-anchor="middle" class="tick">14.08 03:00</text>
-<line x1="737.3" y1="380" x2="737.3" y2="385" stroke="var(--axis)" stroke-width="1"/>
-<text x="737.3" y="400" text-anchor="middle" class="tick">14.08 09:00</text>
-<polyline points="52.0,126.3 56.3,163.3 307.0,121.3 309.1,136.1 311.3,110.6 313.4,90.2 315.5,105.0 317.6,100.3 319.8,148.4 321.9,137.8 324.0,171.7 326.1,170.8 328.3,131.1 330.4,121.3 332.5,135.8 334.6,96.4 336.8,154.9 338.9,85.2 341.0,96.9 343.1,97.5 345.3,87.4 347.4,126.6 349.5,87.4 351.6,141.2 353.8,135.0 355.9,132.8 358.0,169.4 360.1,120.4 362.3,113.7 366.5,180.1 368.6,151.2 370.8,129.4 372.9,136.4 375.0,124.6 377.1,114.3 379.3,138.1 381.4,121.0 383.5,113.7 385.6,121.3 387.8,123.5 389.9,135.3 392.0,121.8 394.1,90.2 396.3,121.6 398.4,91.3 400.5,222.6 402.6,156.3 404.8,163.0 406.9,85.2 409.0,117.1 411.1,147.0 413.3,96.6 415.4,109.8 417.5,117.6 419.6,116.0 421.8,116.8 423.9,102.2 428.1,136.4 430.3,123.5 432.4,151.0 434.5,145.9 436.6,195.2 438.8,174.2 440.9,238.0 443.0,171.1 445.1,152.1 447.3,117.4 449.4,120.2 451.5,126.6 453.6,119.6 455.8,144.5 457.9,166.4 460.0,129.4 462.1,108.7 464.3,264.6 466.4,108.7 468.5,108.1 470.6,270.0 472.8,120.2 474.9,113.4 477.0,131.6 479.1,143.1 481.3,186.5 483.4,177.3 757.5,209.2 759.6,98.9 761.8,335.2 763.9,125.8 766.0,215.1 768.1,111.8 770.2,121.0 772.4,122.7 774.5,140.3 776.6,122.7 778.7,105.9 780.9,95.8 783.0,91.0 785.1,87.1 787.3,101.7 789.4,92.4 791.5,105.0 793.6,104.8 795.7,94.4 797.9,138.9 800.0,127.4" fill="none" stroke="var(--s1)" stroke-width="2" stroke-linejoin="round" opacity="0.85"/>
+<line x1="105.0" y1="380" x2="105.0" y2="385" stroke="var(--axis)" stroke-width="1"/>
+<text x="105.0" y="400" text-anchor="middle" class="tick">13.08 03:00</text>
+<line x1="230.7" y1="380" x2="230.7" y2="385" stroke="var(--axis)" stroke-width="1"/>
+<text x="230.7" y="400" text-anchor="middle" class="tick">13.08 09:00</text>
+<line x1="356.4" y1="380" x2="356.4" y2="385" stroke="var(--axis)" stroke-width="1"/>
+<text x="356.4" y="400" text-anchor="middle" class="tick">13.08 15:00</text>
+<line x1="482.1" y1="380" x2="482.1" y2="385" stroke="var(--axis)" stroke-width="1"/>
+<text x="482.1" y="400" text-anchor="middle" class="tick">13.08 21:00</text>
+<line x1="607.7" y1="380" x2="607.7" y2="385" stroke="var(--axis)" stroke-width="1"/>
+<text x="607.7" y="400" text-anchor="middle" class="tick">14.08 03:00</text>
+<line x1="733.4" y1="380" x2="733.4" y2="385" stroke="var(--axis)" stroke-width="1"/>
+<text x="733.4" y="400" text-anchor="middle" class="tick">14.08 09:00</text>
+<polyline points="52.0,126.3 56.2,163.3 305.6,121.3 307.7,136.1 309.8,110.6 311.9,90.2 314.0,105.0 316.1,100.3 318.3,148.4 320.4,137.8 322.5,171.7 324.6,170.8 326.7,131.1 328.8,121.3 330.9,135.8 333.0,96.4 335.2,154.9 337.3,85.2 339.4,96.9 341.5,97.5 343.6,87.4 345.7,126.6 347.8,87.4 349.9,141.2 352.1,135.0 354.2,132.8 356.3,169.4 358.4,120.4 360.5,113.7 364.7,180.1 366.8,151.2 369.0,129.4 371.1,136.4 373.2,124.6 375.3,114.3 377.4,138.1 379.5,121.0 381.6,113.7 383.8,121.3 385.9,123.5 388.0,135.3 390.1,121.8 392.2,90.2 394.3,121.6 396.4,91.3 398.5,222.6 400.7,156.3 402.8,163.0 404.9,85.2 407.0,117.1 409.1,147.0 411.2,96.6 413.3,109.8 415.5,117.6 417.6,116.0 419.7,116.8 421.8,102.2 426.0,136.4 428.1,123.5 430.2,151.0 432.4,145.9 434.5,195.2 436.6,174.2 438.7,238.0 440.8,171.1 442.9,152.1 445.0,117.4 447.1,120.2 449.3,126.6 451.4,119.6 453.5,144.5 455.6,166.4 457.7,129.4 459.8,108.7 461.9,264.6 464.0,108.7 466.2,108.1 468.3,270.0 470.4,120.2 472.5,113.4 474.6,131.6 476.7,143.1 478.8,186.5 481.0,177.3 753.5,209.2 755.6,98.9 757.7,335.2 759.9,125.8 762.0,215.1 764.1,111.8 766.2,121.0 768.3,122.7 770.4,140.3 772.5,122.7 774.6,105.9 776.8,95.8 778.9,91.0 781.0,87.1 783.1,101.7 785.2,92.4 787.3,105.0 789.4,104.8 791.5,94.4 793.7,138.9 795.8,127.4 797.9,123.0 800.0,170.3" fill="none" stroke="var(--s1)" stroke-width="2" stroke-linejoin="round" opacity="0.85"/>
 <circle cx="52.0" cy="126.3" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  230,6 V  —  13.08.2026 00:28:06</title></circle>
-<circle cx="56.3" cy="163.3" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  217,4 V  —  13.08.2026 00:40:13</title></circle>
-<circle cx="307.0" cy="121.3" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  232,4 V  —  13.08.2026 12:34:28</title></circle>
-<circle cx="309.1" cy="136.1" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  227,1 V  —  13.08.2026 12:40:31</title></circle>
-<circle cx="311.3" cy="110.6" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  236,2 V  —  13.08.2026 12:46:34</title></circle>
-<circle cx="313.4" cy="90.2" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  243,5 V  —  13.08.2026 12:52:37</title></circle>
-<circle cx="315.5" cy="105.0" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  238,2 V  —  13.08.2026 12:58:41</title></circle>
-<circle cx="317.6" cy="100.3" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  239,9 V  —  13.08.2026 13:04:44</title></circle>
-<circle cx="319.8" cy="148.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  222,7 V  —  13.08.2026 13:10:48</title></circle>
-<circle cx="321.9" cy="137.8" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  226,5 V  —  13.08.2026 13:16:50</title></circle>
-<circle cx="324.0" cy="171.7" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  214,4 V  —  13.08.2026 13:22:54</title></circle>
-<circle cx="326.1" cy="170.8" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  214,7 V  —  13.08.2026 13:28:57</title></circle>
-<circle cx="328.3" cy="131.1" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  228,9 V  —  13.08.2026 13:35:00</title></circle>
-<circle cx="330.4" cy="121.3" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  232,4 V  —  13.08.2026 13:41:03</title></circle>
-<circle cx="332.5" cy="135.8" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  227,2 V  —  13.08.2026 13:47:06</title></circle>
-<circle cx="334.6" cy="96.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  241,3 V  —  13.08.2026 13:53:09</title></circle>
-<circle cx="336.8" cy="154.9" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  220,4 V  —  13.08.2026 13:59:13</title></circle>
-<circle cx="338.9" cy="85.2" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  245,3 V  —  13.08.2026 14:05:16</title></circle>
-<circle cx="341.0" cy="96.9" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  241,1 V  —  13.08.2026 14:11:19</title></circle>
-<circle cx="343.1" cy="97.5" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  240,9 V  —  13.08.2026 14:17:22</title></circle>
-<circle cx="345.3" cy="87.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  244,5 V  —  13.08.2026 14:23:25</title></circle>
-<circle cx="347.4" cy="126.6" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  230,5 V  —  13.08.2026 14:29:29</title></circle>
-<circle cx="349.5" cy="87.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  244,5 V  —  13.08.2026 14:35:32</title></circle>
-<circle cx="351.6" cy="141.2" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  225,3 V  —  13.08.2026 14:41:35</title></circle>
-<circle cx="353.8" cy="135.0" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  227,5 V  —  13.08.2026 14:47:38</title></circle>
-<circle cx="355.9" cy="132.8" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  228,3 V  —  13.08.2026 14:53:41</title></circle>
-<circle cx="358.0" cy="169.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  215,2 V  —  13.08.2026 14:59:44</title></circle>
-<circle cx="360.1" cy="120.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  232,7 V  —  13.08.2026 15:05:48</title></circle>
-<circle cx="362.3" cy="113.7" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  235,1 V  —  13.08.2026 15:11:51</title></circle>
-<circle cx="366.5" cy="180.1" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  211,4 V  —  13.08.2026 15:23:57</title></circle>
-<circle cx="368.6" cy="151.2" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  221,7 V  —  13.08.2026 15:30:00</title></circle>
-<circle cx="370.8" cy="129.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  229,5 V  —  13.08.2026 15:36:03</title></circle>
-<circle cx="372.9" cy="136.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  227,0 V  —  13.08.2026 15:42:07</title></circle>
-<circle cx="375.0" cy="124.6" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  231,2 V  —  13.08.2026 15:48:10</title></circle>
-<circle cx="377.1" cy="114.3" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  234,9 V  —  13.08.2026 15:54:13</title></circle>
-<circle cx="379.3" cy="138.1" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  226,4 V  —  13.08.2026 16:00:16</title></circle>
-<circle cx="381.4" cy="121.0" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  232,5 V  —  13.08.2026 16:06:19</title></circle>
-<circle cx="383.5" cy="113.7" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  235,1 V  —  13.08.2026 16:12:22</title></circle>
-<circle cx="385.6" cy="121.3" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  232,4 V  —  13.08.2026 16:18:26</title></circle>
-<circle cx="387.8" cy="123.5" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  231,6 V  —  13.08.2026 16:24:29</title></circle>
-<circle cx="389.9" cy="135.3" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  227,4 V  —  13.08.2026 16:30:32</title></circle>
-<circle cx="392.0" cy="121.8" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  232,2 V  —  13.08.2026 16:36:35</title></circle>
-<circle cx="394.1" cy="90.2" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  243,5 V  —  13.08.2026 16:42:38</title></circle>
-<circle cx="396.3" cy="121.6" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  232,3 V  —  13.08.2026 16:48:42</title></circle>
-<circle cx="398.4" cy="91.3" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  243,1 V  —  13.08.2026 16:54:45</title></circle>
-<circle cx="400.5" cy="222.6" r="5" fill="var(--s1)" stroke="var(--crit)" stroke-width="2.5"><title>L1  196,2 V  —  13.08.2026 17:00:48  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="402.6" cy="156.3" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  219,9 V  —  13.08.2026 17:06:51</title></circle>
-<circle cx="404.8" cy="163.0" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  217,5 V  —  13.08.2026 17:12:55</title></circle>
-<circle cx="406.9" cy="85.2" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  245,3 V  —  13.08.2026 17:18:58</title></circle>
-<circle cx="409.0" cy="117.1" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  233,9 V  —  13.08.2026 17:25:01</title></circle>
-<circle cx="411.1" cy="147.0" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  223,2 V  —  13.08.2026 17:31:04</title></circle>
-<circle cx="413.3" cy="96.6" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  241,2 V  —  13.08.2026 17:37:07</title></circle>
-<circle cx="415.4" cy="109.8" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  236,5 V  —  13.08.2026 17:43:11</title></circle>
-<circle cx="417.5" cy="117.6" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  233,7 V  —  13.08.2026 17:49:14</title></circle>
-<circle cx="419.6" cy="116.0" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  234,3 V  —  13.08.2026 17:55:17</title></circle>
-<circle cx="421.8" cy="116.8" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  234,0 V  —  13.08.2026 18:01:20</title></circle>
-<circle cx="423.9" cy="102.2" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  239,2 V  —  13.08.2026 18:07:23</title></circle>
-<circle cx="428.1" cy="136.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  227,0 V  —  13.08.2026 18:19:29</title></circle>
-<circle cx="430.3" cy="123.5" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  231,6 V  —  13.08.2026 18:25:33</title></circle>
-<circle cx="432.4" cy="151.0" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  221,8 V  —  13.08.2026 18:31:36</title></circle>
-<circle cx="434.5" cy="145.9" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  223,6 V  —  13.08.2026 18:37:39</title></circle>
-<circle cx="436.6" cy="195.2" r="5" fill="var(--s1)" stroke="var(--crit)" stroke-width="2.5"><title>L1  206,0 V  —  13.08.2026 18:43:42  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="438.8" cy="174.2" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  213,5 V  —  13.08.2026 18:49:45</title></circle>
-<circle cx="440.9" cy="238.0" r="5" fill="var(--s1)" stroke="var(--crit)" stroke-width="2.5"><title>L1  190,7 V  —  13.08.2026 18:55:48  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="443.0" cy="171.1" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  214,6 V  —  13.08.2026 19:01:51</title></circle>
-<circle cx="445.1" cy="152.1" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  221,4 V  —  13.08.2026 19:07:55</title></circle>
-<circle cx="447.3" cy="117.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  233,8 V  —  13.08.2026 19:13:58</title></circle>
-<circle cx="449.4" cy="120.2" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  232,8 V  —  13.08.2026 19:20:01</title></circle>
-<circle cx="451.5" cy="126.6" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  230,5 V  —  13.08.2026 19:26:04</title></circle>
-<circle cx="453.6" cy="119.6" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  233,0 V  —  13.08.2026 19:32:07</title></circle>
-<circle cx="455.8" cy="144.5" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  224,1 V  —  13.08.2026 19:38:10</title></circle>
-<circle cx="457.9" cy="166.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  216,3 V  —  13.08.2026 19:44:13</title></circle>
-<circle cx="460.0" cy="129.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  229,5 V  —  13.08.2026 19:50:16</title></circle>
-<circle cx="462.1" cy="108.7" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  236,9 V  —  13.08.2026 19:56:20</title></circle>
-<circle cx="464.3" cy="264.6" r="5" fill="var(--s1)" stroke="var(--crit)" stroke-width="2.5"><title>L1  181,2 V  —  13.08.2026 20:02:23  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="466.4" cy="108.7" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  236,9 V  —  13.08.2026 20:08:26</title></circle>
-<circle cx="468.5" cy="108.1" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  237,1 V  —  13.08.2026 20:14:29</title></circle>
-<circle cx="470.6" cy="270.0" r="5" fill="var(--s1)" stroke="var(--crit)" stroke-width="2.5"><title>L1  179,3 V  —  13.08.2026 20:20:32  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="472.8" cy="120.2" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  232,8 V  —  13.08.2026 20:26:35</title></circle>
-<circle cx="474.9" cy="113.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  235,2 V  —  13.08.2026 20:32:38</title></circle>
-<circle cx="477.0" cy="131.6" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  228,7 V  —  13.08.2026 20:38:42</title></circle>
-<circle cx="479.1" cy="143.1" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  224,6 V  —  13.08.2026 20:44:45</title></circle>
-<circle cx="481.3" cy="186.5" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  209,1 V  —  13.08.2026 20:50:48</title></circle>
-<circle cx="483.4" cy="177.3" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  212,4 V  —  13.08.2026 20:56:51</title></circle>
-<circle cx="757.5" cy="209.2" r="5" fill="var(--s1)" stroke="var(--crit)" stroke-width="2.5"><title>L1  201,0 V  —  14.08.2026 09:57:37  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="759.6" cy="98.9" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  240,4 V  —  14.08.2026 10:03:40</title></circle>
-<circle cx="761.8" cy="335.2" r="5" fill="var(--s1)" stroke="var(--crit)" stroke-width="2.5"><title>L1  156,0 V  —  14.08.2026 10:09:44  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="763.9" cy="125.8" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  230,8 V  —  14.08.2026 10:15:47</title></circle>
-<circle cx="766.0" cy="215.1" r="5" fill="var(--s1)" stroke="var(--crit)" stroke-width="2.5"><title>L1  198,9 V  —  14.08.2026 10:21:50  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="768.1" cy="111.8" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  235,8 V  —  14.08.2026 10:27:53</title></circle>
-<circle cx="770.2" cy="121.0" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  232,5 V  —  14.08.2026 10:33:56</title></circle>
-<circle cx="772.4" cy="122.7" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  231,9 V  —  14.08.2026 10:39:59</title></circle>
-<circle cx="774.5" cy="140.3" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  225,6 V  —  14.08.2026 10:46:02</title></circle>
-<circle cx="776.6" cy="122.7" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  231,9 V  —  14.08.2026 10:52:06</title></circle>
-<circle cx="778.7" cy="105.9" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  237,9 V  —  14.08.2026 10:58:09</title></circle>
-<circle cx="780.9" cy="95.8" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  241,5 V  —  14.08.2026 11:04:12</title></circle>
-<circle cx="783.0" cy="91.0" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  243,2 V  —  14.08.2026 11:10:15</title></circle>
-<circle cx="785.1" cy="87.1" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  244,6 V  —  14.08.2026 11:16:19</title></circle>
-<circle cx="787.3" cy="101.7" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  239,4 V  —  14.08.2026 11:22:22</title></circle>
-<circle cx="789.4" cy="92.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  242,7 V  —  14.08.2026 11:28:25</title></circle>
-<circle cx="791.5" cy="105.0" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  238,2 V  —  14.08.2026 11:34:28</title></circle>
-<circle cx="793.6" cy="104.8" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  238,3 V  —  14.08.2026 11:40:31</title></circle>
-<circle cx="795.7" cy="94.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  242,0 V  —  14.08.2026 11:46:34</title></circle>
-<circle cx="797.9" cy="138.9" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  226,1 V  —  14.08.2026 11:52:37</title></circle>
-<circle cx="800.0" cy="127.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  230,2 V  —  14.08.2026 11:58:41</title></circle>
-<text x="812.0" y="131.4" class="dlab" fill="var(--s1)">L1</text>
-<polyline points="52.0,125.8 56.3,162.7 307.0,121.3 309.1,136.1 311.3,110.6 313.4,90.2 315.5,104.8 317.6,98.6 319.8,148.2 321.9,137.5 324.0,170.0 326.1,169.2 328.3,131.1 330.4,121.3 332.5,135.8 334.6,96.4 336.8,152.1 338.9,85.2 341.0,96.9 343.1,97.5 345.3,87.4 347.4,125.5 349.5,87.4 351.6,141.4 353.8,135.0 355.9,132.8 358.0,167.8 360.1,119.9 362.3,113.4 364.4,163.0 366.5,176.2 368.6,148.4 370.8,129.1 372.9,135.8 375.0,124.1 377.1,114.0 379.3,136.7 381.4,120.7 383.5,113.7 385.6,121.0 387.8,123.5 389.9,135.0 392.0,120.4 394.1,90.2 396.3,119.9 398.4,91.0 400.5,219.3 402.6,153.2 404.8,160.5 406.9,84.6 409.0,115.1 411.1,145.4 413.3,96.4 415.4,108.1 417.5,116.0 419.6,114.6 421.8,115.4 423.9,102.0 426.0,121.3 428.1,135.0 430.3,121.8 432.4,149.6 434.5,144.5 436.6,193.2 438.8,172.8 440.9,236.6 443.0,167.2 445.1,149.0 447.3,116.0 449.4,118.5 451.5,124.6 453.6,119.0 455.8,144.2 457.9,163.6 460.0,129.4 462.1,108.7 464.3,273.6 466.4,108.1 468.5,107.8 470.6,278.6 472.8,119.6 474.9,112.9 477.0,131.1 479.1,142.6 481.3,185.7 483.4,176.7 757.5,219.3 759.6,98.6 761.8,342.5 763.9,125.5 766.0,214.5 768.1,111.5 770.2,120.7 772.4,122.4 774.5,140.0 776.6,122.1 778.7,105.6 780.9,95.2 783.0,90.5 785.1,86.8 787.3,101.4 789.4,92.2 791.5,105.0 793.6,104.5 795.7,94.1 797.9,138.6 800.0,126.9" fill="none" stroke="var(--s2)" stroke-width="2" stroke-linejoin="round" opacity="0.85"/>
+<circle cx="56.2" cy="163.3" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  217,4 V  —  13.08.2026 00:40:13</title></circle>
+<circle cx="305.6" cy="121.3" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  232,4 V  —  13.08.2026 12:34:28</title></circle>
+<circle cx="307.7" cy="136.1" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  227,1 V  —  13.08.2026 12:40:31</title></circle>
+<circle cx="309.8" cy="110.6" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  236,2 V  —  13.08.2026 12:46:34</title></circle>
+<circle cx="311.9" cy="90.2" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  243,5 V  —  13.08.2026 12:52:37</title></circle>
+<circle cx="314.0" cy="105.0" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  238,2 V  —  13.08.2026 12:58:41</title></circle>
+<circle cx="316.1" cy="100.3" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  239,9 V  —  13.08.2026 13:04:44</title></circle>
+<circle cx="318.3" cy="148.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  222,7 V  —  13.08.2026 13:10:48</title></circle>
+<circle cx="320.4" cy="137.8" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  226,5 V  —  13.08.2026 13:16:50</title></circle>
+<circle cx="322.5" cy="171.7" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  214,4 V  —  13.08.2026 13:22:54</title></circle>
+<circle cx="324.6" cy="170.8" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  214,7 V  —  13.08.2026 13:28:57</title></circle>
+<circle cx="326.7" cy="131.1" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  228,9 V  —  13.08.2026 13:35:00</title></circle>
+<circle cx="328.8" cy="121.3" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  232,4 V  —  13.08.2026 13:41:03</title></circle>
+<circle cx="330.9" cy="135.8" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  227,2 V  —  13.08.2026 13:47:06</title></circle>
+<circle cx="333.0" cy="96.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  241,3 V  —  13.08.2026 13:53:09</title></circle>
+<circle cx="335.2" cy="154.9" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  220,4 V  —  13.08.2026 13:59:13</title></circle>
+<circle cx="337.3" cy="85.2" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  245,3 V  —  13.08.2026 14:05:16</title></circle>
+<circle cx="339.4" cy="96.9" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  241,1 V  —  13.08.2026 14:11:19</title></circle>
+<circle cx="341.5" cy="97.5" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  240,9 V  —  13.08.2026 14:17:22</title></circle>
+<circle cx="343.6" cy="87.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  244,5 V  —  13.08.2026 14:23:25</title></circle>
+<circle cx="345.7" cy="126.6" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  230,5 V  —  13.08.2026 14:29:29</title></circle>
+<circle cx="347.8" cy="87.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  244,5 V  —  13.08.2026 14:35:32</title></circle>
+<circle cx="349.9" cy="141.2" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  225,3 V  —  13.08.2026 14:41:35</title></circle>
+<circle cx="352.1" cy="135.0" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  227,5 V  —  13.08.2026 14:47:38</title></circle>
+<circle cx="354.2" cy="132.8" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  228,3 V  —  13.08.2026 14:53:41</title></circle>
+<circle cx="356.3" cy="169.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  215,2 V  —  13.08.2026 14:59:44</title></circle>
+<circle cx="358.4" cy="120.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  232,7 V  —  13.08.2026 15:05:48</title></circle>
+<circle cx="360.5" cy="113.7" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  235,1 V  —  13.08.2026 15:11:51</title></circle>
+<circle cx="364.7" cy="180.1" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  211,4 V  —  13.08.2026 15:23:57</title></circle>
+<circle cx="366.8" cy="151.2" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  221,7 V  —  13.08.2026 15:30:00</title></circle>
+<circle cx="369.0" cy="129.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  229,5 V  —  13.08.2026 15:36:03</title></circle>
+<circle cx="371.1" cy="136.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  227,0 V  —  13.08.2026 15:42:07</title></circle>
+<circle cx="373.2" cy="124.6" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  231,2 V  —  13.08.2026 15:48:10</title></circle>
+<circle cx="375.3" cy="114.3" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  234,9 V  —  13.08.2026 15:54:13</title></circle>
+<circle cx="377.4" cy="138.1" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  226,4 V  —  13.08.2026 16:00:16</title></circle>
+<circle cx="379.5" cy="121.0" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  232,5 V  —  13.08.2026 16:06:19</title></circle>
+<circle cx="381.6" cy="113.7" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  235,1 V  —  13.08.2026 16:12:22</title></circle>
+<circle cx="383.8" cy="121.3" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  232,4 V  —  13.08.2026 16:18:26</title></circle>
+<circle cx="385.9" cy="123.5" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  231,6 V  —  13.08.2026 16:24:29</title></circle>
+<circle cx="388.0" cy="135.3" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  227,4 V  —  13.08.2026 16:30:32</title></circle>
+<circle cx="390.1" cy="121.8" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  232,2 V  —  13.08.2026 16:36:35</title></circle>
+<circle cx="392.2" cy="90.2" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  243,5 V  —  13.08.2026 16:42:38</title></circle>
+<circle cx="394.3" cy="121.6" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  232,3 V  —  13.08.2026 16:48:42</title></circle>
+<circle cx="396.4" cy="91.3" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  243,1 V  —  13.08.2026 16:54:45</title></circle>
+<circle cx="398.5" cy="222.6" r="5" fill="var(--s1)" stroke="var(--crit)" stroke-width="2.5"><title>L1  196,2 V  —  13.08.2026 17:00:48  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="400.7" cy="156.3" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  219,9 V  —  13.08.2026 17:06:51</title></circle>
+<circle cx="402.8" cy="163.0" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  217,5 V  —  13.08.2026 17:12:55</title></circle>
+<circle cx="404.9" cy="85.2" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  245,3 V  —  13.08.2026 17:18:58</title></circle>
+<circle cx="407.0" cy="117.1" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  233,9 V  —  13.08.2026 17:25:01</title></circle>
+<circle cx="409.1" cy="147.0" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  223,2 V  —  13.08.2026 17:31:04</title></circle>
+<circle cx="411.2" cy="96.6" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  241,2 V  —  13.08.2026 17:37:07</title></circle>
+<circle cx="413.3" cy="109.8" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  236,5 V  —  13.08.2026 17:43:11</title></circle>
+<circle cx="415.5" cy="117.6" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  233,7 V  —  13.08.2026 17:49:14</title></circle>
+<circle cx="417.6" cy="116.0" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  234,3 V  —  13.08.2026 17:55:17</title></circle>
+<circle cx="419.7" cy="116.8" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  234,0 V  —  13.08.2026 18:01:20</title></circle>
+<circle cx="421.8" cy="102.2" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  239,2 V  —  13.08.2026 18:07:23</title></circle>
+<circle cx="426.0" cy="136.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  227,0 V  —  13.08.2026 18:19:29</title></circle>
+<circle cx="428.1" cy="123.5" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  231,6 V  —  13.08.2026 18:25:33</title></circle>
+<circle cx="430.2" cy="151.0" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  221,8 V  —  13.08.2026 18:31:36</title></circle>
+<circle cx="432.4" cy="145.9" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  223,6 V  —  13.08.2026 18:37:39</title></circle>
+<circle cx="434.5" cy="195.2" r="5" fill="var(--s1)" stroke="var(--crit)" stroke-width="2.5"><title>L1  206,0 V  —  13.08.2026 18:43:42  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="436.6" cy="174.2" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  213,5 V  —  13.08.2026 18:49:45</title></circle>
+<circle cx="438.7" cy="238.0" r="5" fill="var(--s1)" stroke="var(--crit)" stroke-width="2.5"><title>L1  190,7 V  —  13.08.2026 18:55:48  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="440.8" cy="171.1" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  214,6 V  —  13.08.2026 19:01:51</title></circle>
+<circle cx="442.9" cy="152.1" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  221,4 V  —  13.08.2026 19:07:55</title></circle>
+<circle cx="445.0" cy="117.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  233,8 V  —  13.08.2026 19:13:58</title></circle>
+<circle cx="447.1" cy="120.2" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  232,8 V  —  13.08.2026 19:20:01</title></circle>
+<circle cx="449.3" cy="126.6" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  230,5 V  —  13.08.2026 19:26:04</title></circle>
+<circle cx="451.4" cy="119.6" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  233,0 V  —  13.08.2026 19:32:07</title></circle>
+<circle cx="453.5" cy="144.5" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  224,1 V  —  13.08.2026 19:38:10</title></circle>
+<circle cx="455.6" cy="166.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  216,3 V  —  13.08.2026 19:44:13</title></circle>
+<circle cx="457.7" cy="129.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  229,5 V  —  13.08.2026 19:50:16</title></circle>
+<circle cx="459.8" cy="108.7" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  236,9 V  —  13.08.2026 19:56:20</title></circle>
+<circle cx="461.9" cy="264.6" r="5" fill="var(--s1)" stroke="var(--crit)" stroke-width="2.5"><title>L1  181,2 V  —  13.08.2026 20:02:23  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="464.0" cy="108.7" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  236,9 V  —  13.08.2026 20:08:26</title></circle>
+<circle cx="466.2" cy="108.1" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  237,1 V  —  13.08.2026 20:14:29</title></circle>
+<circle cx="468.3" cy="270.0" r="5" fill="var(--s1)" stroke="var(--crit)" stroke-width="2.5"><title>L1  179,3 V  —  13.08.2026 20:20:32  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="470.4" cy="120.2" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  232,8 V  —  13.08.2026 20:26:35</title></circle>
+<circle cx="472.5" cy="113.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  235,2 V  —  13.08.2026 20:32:38</title></circle>
+<circle cx="474.6" cy="131.6" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  228,7 V  —  13.08.2026 20:38:42</title></circle>
+<circle cx="476.7" cy="143.1" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  224,6 V  —  13.08.2026 20:44:45</title></circle>
+<circle cx="478.8" cy="186.5" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  209,1 V  —  13.08.2026 20:50:48</title></circle>
+<circle cx="481.0" cy="177.3" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  212,4 V  —  13.08.2026 20:56:51</title></circle>
+<circle cx="753.5" cy="209.2" r="5" fill="var(--s1)" stroke="var(--crit)" stroke-width="2.5"><title>L1  201,0 V  —  14.08.2026 09:57:37  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="755.6" cy="98.9" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  240,4 V  —  14.08.2026 10:03:40</title></circle>
+<circle cx="757.7" cy="335.2" r="5" fill="var(--s1)" stroke="var(--crit)" stroke-width="2.5"><title>L1  156,0 V  —  14.08.2026 10:09:44  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="759.9" cy="125.8" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  230,8 V  —  14.08.2026 10:15:47</title></circle>
+<circle cx="762.0" cy="215.1" r="5" fill="var(--s1)" stroke="var(--crit)" stroke-width="2.5"><title>L1  198,9 V  —  14.08.2026 10:21:50  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="764.1" cy="111.8" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  235,8 V  —  14.08.2026 10:27:53</title></circle>
+<circle cx="766.2" cy="121.0" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  232,5 V  —  14.08.2026 10:33:56</title></circle>
+<circle cx="768.3" cy="122.7" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  231,9 V  —  14.08.2026 10:39:59</title></circle>
+<circle cx="770.4" cy="140.3" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  225,6 V  —  14.08.2026 10:46:02</title></circle>
+<circle cx="772.5" cy="122.7" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  231,9 V  —  14.08.2026 10:52:06</title></circle>
+<circle cx="774.6" cy="105.9" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  237,9 V  —  14.08.2026 10:58:09</title></circle>
+<circle cx="776.8" cy="95.8" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  241,5 V  —  14.08.2026 11:04:12</title></circle>
+<circle cx="778.9" cy="91.0" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  243,2 V  —  14.08.2026 11:10:15</title></circle>
+<circle cx="781.0" cy="87.1" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  244,6 V  —  14.08.2026 11:16:19</title></circle>
+<circle cx="783.1" cy="101.7" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  239,4 V  —  14.08.2026 11:22:22</title></circle>
+<circle cx="785.2" cy="92.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  242,7 V  —  14.08.2026 11:28:25</title></circle>
+<circle cx="787.3" cy="105.0" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  238,2 V  —  14.08.2026 11:34:28</title></circle>
+<circle cx="789.4" cy="104.8" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  238,3 V  —  14.08.2026 11:40:31</title></circle>
+<circle cx="791.5" cy="94.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  242,0 V  —  14.08.2026 11:46:34</title></circle>
+<circle cx="793.7" cy="138.9" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  226,1 V  —  14.08.2026 11:52:37</title></circle>
+<circle cx="795.8" cy="127.4" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  230,2 V  —  14.08.2026 11:58:41</title></circle>
+<circle cx="797.9" cy="123.0" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  231,8 V  —  14.08.2026 12:04:44</title></circle>
+<circle cx="800.0" cy="170.3" r="4" fill="var(--s1)" stroke="var(--surf)" stroke-width="1.5"><title>L1  214,9 V  —  14.08.2026 12:10:47</title></circle>
+<text x="812.0" y="174.3" class="dlab" fill="var(--s1)">L1</text>
+<polyline points="52.0,125.8 56.2,162.7 305.6,121.3 307.7,136.1 309.8,110.6 311.9,90.2 314.0,104.8 316.1,98.6 318.3,148.2 320.4,137.5 322.5,170.0 324.6,169.2 326.7,131.1 328.8,121.3 330.9,135.8 333.0,96.4 335.2,152.1 337.3,85.2 339.4,96.9 341.5,97.5 343.6,87.4 345.7,125.5 347.8,87.4 349.9,141.4 352.1,135.0 354.2,132.8 356.3,167.8 358.4,119.9 360.5,113.4 362.7,163.0 364.7,176.2 366.8,148.4 369.0,129.1 371.1,135.8 373.2,124.1 375.3,114.0 377.4,136.7 379.5,120.7 381.6,113.7 383.8,121.0 385.9,123.5 388.0,135.0 390.1,120.4 392.2,90.2 394.3,119.9 396.4,91.0 398.5,219.3 400.7,153.2 402.8,160.5 404.9,84.6 407.0,115.1 409.1,145.4 411.2,96.4 413.3,108.1 415.5,116.0 417.6,114.6 419.7,115.4 421.8,102.0 423.9,121.3 426.0,135.0 428.1,121.8 430.2,149.6 432.4,144.5 434.5,193.2 436.6,172.8 438.7,236.6 440.8,167.2 442.9,149.0 445.0,116.0 447.1,118.5 449.3,124.6 451.4,119.0 453.5,144.2 455.6,163.6 457.7,129.4 459.8,108.7 461.9,273.6 464.0,108.1 466.2,107.8 468.3,278.6 470.4,119.6 472.5,112.9 474.6,131.1 476.7,142.6 478.8,185.7 481.0,176.7 753.5,219.3 755.6,98.6 757.7,342.5 759.9,125.5 762.0,214.5 764.1,111.5 766.2,120.7 768.3,122.4 770.4,140.0 772.5,122.1 774.6,105.6 776.8,95.2 778.9,90.5 781.0,86.8 783.1,101.4 785.2,92.2 787.3,105.0 789.4,104.5 791.5,94.1 793.7,138.6 795.8,126.9 797.9,122.4 800.0,166.9" fill="none" stroke="var(--s2)" stroke-width="2" stroke-linejoin="round" opacity="0.85"/>
 <circle cx="52.0" cy="125.8" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  230,8 V  —  13.08.2026 00:28:06</title></circle>
-<circle cx="56.3" cy="162.7" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  217,6 V  —  13.08.2026 00:40:13</title></circle>
-<circle cx="307.0" cy="121.3" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,4 V  —  13.08.2026 12:34:28</title></circle>
-<circle cx="309.1" cy="136.1" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  227,1 V  —  13.08.2026 12:40:31</title></circle>
-<circle cx="311.3" cy="110.6" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  236,2 V  —  13.08.2026 12:46:34</title></circle>
-<circle cx="313.4" cy="90.2" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  243,5 V  —  13.08.2026 12:52:37</title></circle>
-<circle cx="315.5" cy="104.8" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  238,3 V  —  13.08.2026 12:58:41</title></circle>
-<circle cx="317.6" cy="98.6" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  240,5 V  —  13.08.2026 13:04:44</title></circle>
-<circle cx="319.8" cy="148.2" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  222,8 V  —  13.08.2026 13:10:48</title></circle>
-<circle cx="321.9" cy="137.5" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  226,6 V  —  13.08.2026 13:16:50</title></circle>
-<circle cx="324.0" cy="170.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  215,0 V  —  13.08.2026 13:22:54</title></circle>
-<circle cx="326.1" cy="169.2" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  215,3 V  —  13.08.2026 13:28:57</title></circle>
-<circle cx="328.3" cy="131.1" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  228,9 V  —  13.08.2026 13:35:00</title></circle>
-<circle cx="330.4" cy="121.3" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,4 V  —  13.08.2026 13:41:03</title></circle>
-<circle cx="332.5" cy="135.8" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  227,2 V  —  13.08.2026 13:47:06</title></circle>
-<circle cx="334.6" cy="96.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  241,3 V  —  13.08.2026 13:53:09</title></circle>
-<circle cx="336.8" cy="152.1" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  221,4 V  —  13.08.2026 13:59:13</title></circle>
-<circle cx="338.9" cy="85.2" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  245,3 V  —  13.08.2026 14:05:16</title></circle>
-<circle cx="341.0" cy="96.9" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  241,1 V  —  13.08.2026 14:11:19</title></circle>
-<circle cx="343.1" cy="97.5" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  240,9 V  —  13.08.2026 14:17:22</title></circle>
-<circle cx="345.3" cy="87.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  244,5 V  —  13.08.2026 14:23:25</title></circle>
-<circle cx="347.4" cy="125.5" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  230,9 V  —  13.08.2026 14:29:29</title></circle>
-<circle cx="349.5" cy="87.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  244,5 V  —  13.08.2026 14:35:32</title></circle>
-<circle cx="351.6" cy="141.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  225,2 V  —  13.08.2026 14:41:35</title></circle>
-<circle cx="353.8" cy="135.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  227,5 V  —  13.08.2026 14:47:38</title></circle>
-<circle cx="355.9" cy="132.8" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  228,3 V  —  13.08.2026 14:53:41</title></circle>
-<circle cx="358.0" cy="167.8" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  215,8 V  —  13.08.2026 14:59:44</title></circle>
-<circle cx="360.1" cy="119.9" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,9 V  —  13.08.2026 15:05:48</title></circle>
-<circle cx="362.3" cy="113.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  235,2 V  —  13.08.2026 15:11:51</title></circle>
-<circle cx="364.4" cy="163.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  217,5 V  —  13.08.2026 15:18:00</title></circle>
-<circle cx="366.5" cy="176.2" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  212,8 V  —  13.08.2026 15:23:57</title></circle>
-<circle cx="368.6" cy="148.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  222,7 V  —  13.08.2026 15:30:00</title></circle>
-<circle cx="370.8" cy="129.1" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  229,6 V  —  13.08.2026 15:36:03</title></circle>
-<circle cx="372.9" cy="135.8" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  227,2 V  —  13.08.2026 15:42:07</title></circle>
-<circle cx="375.0" cy="124.1" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  231,4 V  —  13.08.2026 15:48:10</title></circle>
-<circle cx="377.1" cy="114.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  235,0 V  —  13.08.2026 15:54:13</title></circle>
-<circle cx="379.3" cy="136.7" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  226,9 V  —  13.08.2026 16:00:16</title></circle>
-<circle cx="381.4" cy="120.7" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,6 V  —  13.08.2026 16:06:19</title></circle>
-<circle cx="383.5" cy="113.7" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  235,1 V  —  13.08.2026 16:12:22</title></circle>
-<circle cx="385.6" cy="121.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,5 V  —  13.08.2026 16:18:26</title></circle>
-<circle cx="387.8" cy="123.5" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  231,6 V  —  13.08.2026 16:24:29</title></circle>
-<circle cx="389.9" cy="135.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  227,5 V  —  13.08.2026 16:30:32</title></circle>
-<circle cx="392.0" cy="120.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,7 V  —  13.08.2026 16:36:35</title></circle>
-<circle cx="394.1" cy="90.2" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  243,5 V  —  13.08.2026 16:42:38</title></circle>
-<circle cx="396.3" cy="119.9" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,9 V  —  13.08.2026 16:48:42</title></circle>
-<circle cx="398.4" cy="91.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  243,2 V  —  13.08.2026 16:54:45</title></circle>
-<circle cx="400.5" cy="219.3" r="5" fill="var(--s2)" stroke="var(--crit)" stroke-width="2.5"><title>L2  197,4 V  —  13.08.2026 17:00:48  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="402.6" cy="153.2" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  221,0 V  —  13.08.2026 17:06:51</title></circle>
-<circle cx="404.8" cy="160.5" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  218,4 V  —  13.08.2026 17:12:55</title></circle>
-<circle cx="406.9" cy="84.6" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  245,5 V  —  13.08.2026 17:18:58</title></circle>
-<circle cx="409.0" cy="115.1" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  234,6 V  —  13.08.2026 17:25:01</title></circle>
-<circle cx="411.1" cy="145.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  223,8 V  —  13.08.2026 17:31:04</title></circle>
-<circle cx="413.3" cy="96.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  241,3 V  —  13.08.2026 17:37:07</title></circle>
-<circle cx="415.4" cy="108.1" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  237,1 V  —  13.08.2026 17:43:11</title></circle>
-<circle cx="417.5" cy="116.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  234,3 V  —  13.08.2026 17:49:14</title></circle>
-<circle cx="419.6" cy="114.6" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  234,8 V  —  13.08.2026 17:55:17</title></circle>
-<circle cx="421.8" cy="115.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  234,5 V  —  13.08.2026 18:01:20</title></circle>
-<circle cx="423.9" cy="102.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  239,3 V  —  13.08.2026 18:07:23</title></circle>
-<circle cx="426.0" cy="121.3" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,4 V  —  13.08.2026 18:13:32</title></circle>
-<circle cx="428.1" cy="135.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  227,5 V  —  13.08.2026 18:19:29</title></circle>
-<circle cx="430.3" cy="121.8" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,2 V  —  13.08.2026 18:25:33</title></circle>
-<circle cx="432.4" cy="149.6" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  222,3 V  —  13.08.2026 18:31:36</title></circle>
-<circle cx="434.5" cy="144.5" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  224,1 V  —  13.08.2026 18:37:39</title></circle>
-<circle cx="436.6" cy="193.2" r="5" fill="var(--s2)" stroke="var(--crit)" stroke-width="2.5"><title>L2  206,7 V  —  13.08.2026 18:43:42  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="438.8" cy="172.8" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  214,0 V  —  13.08.2026 18:49:45</title></circle>
-<circle cx="440.9" cy="236.6" r="5" fill="var(--s2)" stroke="var(--crit)" stroke-width="2.5"><title>L2  191,2 V  —  13.08.2026 18:55:48  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="443.0" cy="167.2" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  216,0 V  —  13.08.2026 19:01:51</title></circle>
-<circle cx="445.1" cy="149.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  222,5 V  —  13.08.2026 19:07:55</title></circle>
-<circle cx="447.3" cy="116.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  234,3 V  —  13.08.2026 19:13:58</title></circle>
-<circle cx="449.4" cy="118.5" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  233,4 V  —  13.08.2026 19:20:01</title></circle>
-<circle cx="451.5" cy="124.6" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  231,2 V  —  13.08.2026 19:26:04</title></circle>
-<circle cx="453.6" cy="119.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  233,2 V  —  13.08.2026 19:32:07</title></circle>
-<circle cx="455.8" cy="144.2" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  224,2 V  —  13.08.2026 19:38:10</title></circle>
-<circle cx="457.9" cy="163.6" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  217,3 V  —  13.08.2026 19:44:13</title></circle>
-<circle cx="460.0" cy="129.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  229,5 V  —  13.08.2026 19:50:16</title></circle>
-<circle cx="462.1" cy="108.7" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  236,9 V  —  13.08.2026 19:56:20</title></circle>
-<circle cx="464.3" cy="273.6" r="5" fill="var(--s2)" stroke="var(--crit)" stroke-width="2.5"><title>L2  178,0 V  —  13.08.2026 20:02:23  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="466.4" cy="108.1" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  237,1 V  —  13.08.2026 20:08:26</title></circle>
-<circle cx="468.5" cy="107.8" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  237,2 V  —  13.08.2026 20:14:29</title></circle>
-<circle cx="470.6" cy="278.6" r="5" fill="var(--s2)" stroke="var(--crit)" stroke-width="2.5"><title>L2  176,2 V  —  13.08.2026 20:20:32  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="472.8" cy="119.6" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  233,0 V  —  13.08.2026 20:26:35</title></circle>
-<circle cx="474.9" cy="112.9" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  235,4 V  —  13.08.2026 20:32:38</title></circle>
-<circle cx="477.0" cy="131.1" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  228,9 V  —  13.08.2026 20:38:42</title></circle>
-<circle cx="479.1" cy="142.6" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  224,8 V  —  13.08.2026 20:44:45</title></circle>
-<circle cx="481.3" cy="185.7" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  209,4 V  —  13.08.2026 20:50:48</title></circle>
-<circle cx="483.4" cy="176.7" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  212,6 V  —  13.08.2026 20:56:51</title></circle>
-<circle cx="757.5" cy="219.3" r="5" fill="var(--s2)" stroke="var(--crit)" stroke-width="2.5"><title>L2  197,4 V  —  14.08.2026 09:57:37  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="759.6" cy="98.6" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  240,5 V  —  14.08.2026 10:03:40</title></circle>
-<circle cx="761.8" cy="342.5" r="5" fill="var(--s2)" stroke="var(--crit)" stroke-width="2.5"><title>L2  153,4 V  —  14.08.2026 10:09:44  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="763.9" cy="125.5" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  230,9 V  —  14.08.2026 10:15:47</title></circle>
-<circle cx="766.0" cy="214.5" r="5" fill="var(--s2)" stroke="var(--crit)" stroke-width="2.5"><title>L2  199,1 V  —  14.08.2026 10:21:50  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="768.1" cy="111.5" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  235,9 V  —  14.08.2026 10:27:53</title></circle>
-<circle cx="770.2" cy="120.7" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,6 V  —  14.08.2026 10:33:56</title></circle>
-<circle cx="772.4" cy="122.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,0 V  —  14.08.2026 10:39:59</title></circle>
-<circle cx="774.5" cy="140.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  225,7 V  —  14.08.2026 10:46:02</title></circle>
-<circle cx="776.6" cy="122.1" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,1 V  —  14.08.2026 10:52:06</title></circle>
-<circle cx="778.7" cy="105.6" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  238,0 V  —  14.08.2026 10:58:09</title></circle>
-<circle cx="780.9" cy="95.2" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  241,7 V  —  14.08.2026 11:04:12</title></circle>
-<circle cx="783.0" cy="90.5" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  243,4 V  —  14.08.2026 11:10:15</title></circle>
-<circle cx="785.1" cy="86.8" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  244,7 V  —  14.08.2026 11:16:19</title></circle>
-<circle cx="787.3" cy="101.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  239,5 V  —  14.08.2026 11:22:22</title></circle>
-<circle cx="789.4" cy="92.2" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  242,8 V  —  14.08.2026 11:28:25</title></circle>
-<circle cx="791.5" cy="105.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  238,2 V  —  14.08.2026 11:34:28</title></circle>
-<circle cx="793.6" cy="104.5" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  238,4 V  —  14.08.2026 11:40:31</title></circle>
-<circle cx="795.7" cy="94.1" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  242,1 V  —  14.08.2026 11:46:34</title></circle>
-<circle cx="797.9" cy="138.6" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  226,2 V  —  14.08.2026 11:52:37</title></circle>
-<circle cx="800.0" cy="126.9" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  230,4 V  —  14.08.2026 11:58:41</title></circle>
-<text x="812.0" y="130.9" class="dlab" fill="var(--s2)">L2</text>
-<polyline points="52.0,86.8 56.3,81.0 307.0,58.6 309.1,74.5 311.3,82.1 313.4,74.8 315.5,79.0 317.6,86.0 319.8,77.3 321.9,108.1 324.0,75.9 326.1,90.2 328.3,86.3 330.4,93.8 332.5,84.9 334.6,84.3 336.8,75.9 338.9,95.2 341.0,92.7 343.1,98.3 345.3,98.0 347.4,83.2 349.5,100.8 351.6,84.3 353.8,84.0 355.9,83.8 358.0,64.7 360.1,69.8 362.3,74.2 364.4,51.6 366.5,69.8 368.6,82.1 370.8,80.7 372.9,80.7 375.0,86.8 377.1,75.4 379.3,66.1 381.4,71.4 383.5,75.9 385.6,73.4 387.8,76.2 389.9,68.4 392.0,74.2 394.1,84.9 396.3,71.7 398.4,73.1 400.5,44.6 402.6,44.6 404.8,62.8 406.9,223.5 409.0,52.4 411.1,74.0 413.3,73.1 415.4,65.8 417.5,37.8 419.6,70.6 421.8,63.6 423.9,70.3 426.0,69.2 428.1,69.5 430.3,72.6 432.4,67.5 434.5,63.6 436.6,60.0 438.8,66.4 440.9,68.9 443.0,77.6 445.1,65.8 447.3,74.2 449.4,73.7 451.5,70.3 453.6,79.6 455.8,75.9 457.9,74.8 460.0,80.1 462.1,87.7 464.3,48.5 466.4,80.1 468.5,86.0 470.6,81.5 472.8,81.5 474.9,162.7 477.0,59.7 479.1,74.5 481.3,135.0 483.4,64.4 757.5,198.0 759.6,74.2 761.8,75.1 763.9,79.3 766.0,65.6 768.1,67.0 770.2,82.6 772.4,82.4 774.5,79.8 776.6,52.7 778.7,83.2 780.9,65.8 783.0,91.6 785.1,95.0 787.3,90.8 789.4,103.1 791.5,92.2 793.6,90.2 795.7,86.6 797.9,77.3 800.0,82.6" fill="none" stroke="var(--s3)" stroke-width="2" stroke-linejoin="round" opacity="0.85"/>
+<circle cx="56.2" cy="162.7" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  217,6 V  —  13.08.2026 00:40:13</title></circle>
+<circle cx="305.6" cy="121.3" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,4 V  —  13.08.2026 12:34:28</title></circle>
+<circle cx="307.7" cy="136.1" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  227,1 V  —  13.08.2026 12:40:31</title></circle>
+<circle cx="309.8" cy="110.6" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  236,2 V  —  13.08.2026 12:46:34</title></circle>
+<circle cx="311.9" cy="90.2" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  243,5 V  —  13.08.2026 12:52:37</title></circle>
+<circle cx="314.0" cy="104.8" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  238,3 V  —  13.08.2026 12:58:41</title></circle>
+<circle cx="316.1" cy="98.6" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  240,5 V  —  13.08.2026 13:04:44</title></circle>
+<circle cx="318.3" cy="148.2" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  222,8 V  —  13.08.2026 13:10:48</title></circle>
+<circle cx="320.4" cy="137.5" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  226,6 V  —  13.08.2026 13:16:50</title></circle>
+<circle cx="322.5" cy="170.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  215,0 V  —  13.08.2026 13:22:54</title></circle>
+<circle cx="324.6" cy="169.2" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  215,3 V  —  13.08.2026 13:28:57</title></circle>
+<circle cx="326.7" cy="131.1" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  228,9 V  —  13.08.2026 13:35:00</title></circle>
+<circle cx="328.8" cy="121.3" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,4 V  —  13.08.2026 13:41:03</title></circle>
+<circle cx="330.9" cy="135.8" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  227,2 V  —  13.08.2026 13:47:06</title></circle>
+<circle cx="333.0" cy="96.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  241,3 V  —  13.08.2026 13:53:09</title></circle>
+<circle cx="335.2" cy="152.1" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  221,4 V  —  13.08.2026 13:59:13</title></circle>
+<circle cx="337.3" cy="85.2" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  245,3 V  —  13.08.2026 14:05:16</title></circle>
+<circle cx="339.4" cy="96.9" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  241,1 V  —  13.08.2026 14:11:19</title></circle>
+<circle cx="341.5" cy="97.5" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  240,9 V  —  13.08.2026 14:17:22</title></circle>
+<circle cx="343.6" cy="87.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  244,5 V  —  13.08.2026 14:23:25</title></circle>
+<circle cx="345.7" cy="125.5" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  230,9 V  —  13.08.2026 14:29:29</title></circle>
+<circle cx="347.8" cy="87.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  244,5 V  —  13.08.2026 14:35:32</title></circle>
+<circle cx="349.9" cy="141.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  225,2 V  —  13.08.2026 14:41:35</title></circle>
+<circle cx="352.1" cy="135.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  227,5 V  —  13.08.2026 14:47:38</title></circle>
+<circle cx="354.2" cy="132.8" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  228,3 V  —  13.08.2026 14:53:41</title></circle>
+<circle cx="356.3" cy="167.8" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  215,8 V  —  13.08.2026 14:59:44</title></circle>
+<circle cx="358.4" cy="119.9" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,9 V  —  13.08.2026 15:05:48</title></circle>
+<circle cx="360.5" cy="113.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  235,2 V  —  13.08.2026 15:11:51</title></circle>
+<circle cx="362.7" cy="163.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  217,5 V  —  13.08.2026 15:18:00</title></circle>
+<circle cx="364.7" cy="176.2" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  212,8 V  —  13.08.2026 15:23:57</title></circle>
+<circle cx="366.8" cy="148.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  222,7 V  —  13.08.2026 15:30:00</title></circle>
+<circle cx="369.0" cy="129.1" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  229,6 V  —  13.08.2026 15:36:03</title></circle>
+<circle cx="371.1" cy="135.8" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  227,2 V  —  13.08.2026 15:42:07</title></circle>
+<circle cx="373.2" cy="124.1" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  231,4 V  —  13.08.2026 15:48:10</title></circle>
+<circle cx="375.3" cy="114.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  235,0 V  —  13.08.2026 15:54:13</title></circle>
+<circle cx="377.4" cy="136.7" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  226,9 V  —  13.08.2026 16:00:16</title></circle>
+<circle cx="379.5" cy="120.7" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,6 V  —  13.08.2026 16:06:19</title></circle>
+<circle cx="381.6" cy="113.7" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  235,1 V  —  13.08.2026 16:12:22</title></circle>
+<circle cx="383.8" cy="121.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,5 V  —  13.08.2026 16:18:26</title></circle>
+<circle cx="385.9" cy="123.5" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  231,6 V  —  13.08.2026 16:24:29</title></circle>
+<circle cx="388.0" cy="135.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  227,5 V  —  13.08.2026 16:30:32</title></circle>
+<circle cx="390.1" cy="120.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,7 V  —  13.08.2026 16:36:35</title></circle>
+<circle cx="392.2" cy="90.2" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  243,5 V  —  13.08.2026 16:42:38</title></circle>
+<circle cx="394.3" cy="119.9" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,9 V  —  13.08.2026 16:48:42</title></circle>
+<circle cx="396.4" cy="91.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  243,2 V  —  13.08.2026 16:54:45</title></circle>
+<circle cx="398.5" cy="219.3" r="5" fill="var(--s2)" stroke="var(--crit)" stroke-width="2.5"><title>L2  197,4 V  —  13.08.2026 17:00:48  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="400.7" cy="153.2" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  221,0 V  —  13.08.2026 17:06:51</title></circle>
+<circle cx="402.8" cy="160.5" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  218,4 V  —  13.08.2026 17:12:55</title></circle>
+<circle cx="404.9" cy="84.6" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  245,5 V  —  13.08.2026 17:18:58</title></circle>
+<circle cx="407.0" cy="115.1" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  234,6 V  —  13.08.2026 17:25:01</title></circle>
+<circle cx="409.1" cy="145.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  223,8 V  —  13.08.2026 17:31:04</title></circle>
+<circle cx="411.2" cy="96.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  241,3 V  —  13.08.2026 17:37:07</title></circle>
+<circle cx="413.3" cy="108.1" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  237,1 V  —  13.08.2026 17:43:11</title></circle>
+<circle cx="415.5" cy="116.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  234,3 V  —  13.08.2026 17:49:14</title></circle>
+<circle cx="417.6" cy="114.6" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  234,8 V  —  13.08.2026 17:55:17</title></circle>
+<circle cx="419.7" cy="115.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  234,5 V  —  13.08.2026 18:01:20</title></circle>
+<circle cx="421.8" cy="102.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  239,3 V  —  13.08.2026 18:07:23</title></circle>
+<circle cx="423.9" cy="121.3" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,4 V  —  13.08.2026 18:13:32</title></circle>
+<circle cx="426.0" cy="135.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  227,5 V  —  13.08.2026 18:19:29</title></circle>
+<circle cx="428.1" cy="121.8" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,2 V  —  13.08.2026 18:25:33</title></circle>
+<circle cx="430.2" cy="149.6" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  222,3 V  —  13.08.2026 18:31:36</title></circle>
+<circle cx="432.4" cy="144.5" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  224,1 V  —  13.08.2026 18:37:39</title></circle>
+<circle cx="434.5" cy="193.2" r="5" fill="var(--s2)" stroke="var(--crit)" stroke-width="2.5"><title>L2  206,7 V  —  13.08.2026 18:43:42  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="436.6" cy="172.8" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  214,0 V  —  13.08.2026 18:49:45</title></circle>
+<circle cx="438.7" cy="236.6" r="5" fill="var(--s2)" stroke="var(--crit)" stroke-width="2.5"><title>L2  191,2 V  —  13.08.2026 18:55:48  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="440.8" cy="167.2" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  216,0 V  —  13.08.2026 19:01:51</title></circle>
+<circle cx="442.9" cy="149.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  222,5 V  —  13.08.2026 19:07:55</title></circle>
+<circle cx="445.0" cy="116.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  234,3 V  —  13.08.2026 19:13:58</title></circle>
+<circle cx="447.1" cy="118.5" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  233,4 V  —  13.08.2026 19:20:01</title></circle>
+<circle cx="449.3" cy="124.6" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  231,2 V  —  13.08.2026 19:26:04</title></circle>
+<circle cx="451.4" cy="119.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  233,2 V  —  13.08.2026 19:32:07</title></circle>
+<circle cx="453.5" cy="144.2" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  224,2 V  —  13.08.2026 19:38:10</title></circle>
+<circle cx="455.6" cy="163.6" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  217,3 V  —  13.08.2026 19:44:13</title></circle>
+<circle cx="457.7" cy="129.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  229,5 V  —  13.08.2026 19:50:16</title></circle>
+<circle cx="459.8" cy="108.7" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  236,9 V  —  13.08.2026 19:56:20</title></circle>
+<circle cx="461.9" cy="273.6" r="5" fill="var(--s2)" stroke="var(--crit)" stroke-width="2.5"><title>L2  178,0 V  —  13.08.2026 20:02:23  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="464.0" cy="108.1" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  237,1 V  —  13.08.2026 20:08:26</title></circle>
+<circle cx="466.2" cy="107.8" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  237,2 V  —  13.08.2026 20:14:29</title></circle>
+<circle cx="468.3" cy="278.6" r="5" fill="var(--s2)" stroke="var(--crit)" stroke-width="2.5"><title>L2  176,2 V  —  13.08.2026 20:20:32  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="470.4" cy="119.6" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  233,0 V  —  13.08.2026 20:26:35</title></circle>
+<circle cx="472.5" cy="112.9" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  235,4 V  —  13.08.2026 20:32:38</title></circle>
+<circle cx="474.6" cy="131.1" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  228,9 V  —  13.08.2026 20:38:42</title></circle>
+<circle cx="476.7" cy="142.6" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  224,8 V  —  13.08.2026 20:44:45</title></circle>
+<circle cx="478.8" cy="185.7" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  209,4 V  —  13.08.2026 20:50:48</title></circle>
+<circle cx="481.0" cy="176.7" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  212,6 V  —  13.08.2026 20:56:51</title></circle>
+<circle cx="753.5" cy="219.3" r="5" fill="var(--s2)" stroke="var(--crit)" stroke-width="2.5"><title>L2  197,4 V  —  14.08.2026 09:57:37  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="755.6" cy="98.6" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  240,5 V  —  14.08.2026 10:03:40</title></circle>
+<circle cx="757.7" cy="342.5" r="5" fill="var(--s2)" stroke="var(--crit)" stroke-width="2.5"><title>L2  153,4 V  —  14.08.2026 10:09:44  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="759.9" cy="125.5" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  230,9 V  —  14.08.2026 10:15:47</title></circle>
+<circle cx="762.0" cy="214.5" r="5" fill="var(--s2)" stroke="var(--crit)" stroke-width="2.5"><title>L2  199,1 V  —  14.08.2026 10:21:50  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="764.1" cy="111.5" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  235,9 V  —  14.08.2026 10:27:53</title></circle>
+<circle cx="766.2" cy="120.7" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,6 V  —  14.08.2026 10:33:56</title></circle>
+<circle cx="768.3" cy="122.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,0 V  —  14.08.2026 10:39:59</title></circle>
+<circle cx="770.4" cy="140.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  225,7 V  —  14.08.2026 10:46:02</title></circle>
+<circle cx="772.5" cy="122.1" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,1 V  —  14.08.2026 10:52:06</title></circle>
+<circle cx="774.6" cy="105.6" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  238,0 V  —  14.08.2026 10:58:09</title></circle>
+<circle cx="776.8" cy="95.2" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  241,7 V  —  14.08.2026 11:04:12</title></circle>
+<circle cx="778.9" cy="90.5" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  243,4 V  —  14.08.2026 11:10:15</title></circle>
+<circle cx="781.0" cy="86.8" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  244,7 V  —  14.08.2026 11:16:19</title></circle>
+<circle cx="783.1" cy="101.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  239,5 V  —  14.08.2026 11:22:22</title></circle>
+<circle cx="785.2" cy="92.2" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  242,8 V  —  14.08.2026 11:28:25</title></circle>
+<circle cx="787.3" cy="105.0" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  238,2 V  —  14.08.2026 11:34:28</title></circle>
+<circle cx="789.4" cy="104.5" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  238,4 V  —  14.08.2026 11:40:31</title></circle>
+<circle cx="791.5" cy="94.1" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  242,1 V  —  14.08.2026 11:46:34</title></circle>
+<circle cx="793.7" cy="138.6" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  226,2 V  —  14.08.2026 11:52:37</title></circle>
+<circle cx="795.8" cy="126.9" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  230,4 V  —  14.08.2026 11:58:41</title></circle>
+<circle cx="797.9" cy="122.4" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  232,0 V  —  14.08.2026 12:04:44</title></circle>
+<circle cx="800.0" cy="166.9" r="4" fill="var(--s2)" stroke="var(--surf)" stroke-width="1.5"><title>L2  216,1 V  —  14.08.2026 12:10:47</title></circle>
+<text x="812.0" y="170.9" class="dlab" fill="var(--s2)">L2</text>
+<polyline points="52.0,86.8 56.2,81.0 305.6,58.6 307.7,74.5 309.8,82.1 311.9,74.8 314.0,79.0 316.1,86.0 318.3,77.3 320.4,108.1 322.5,75.9 324.6,90.2 326.7,86.3 328.8,93.8 330.9,84.9 333.0,84.3 335.2,75.9 337.3,95.2 339.4,92.7 341.5,98.3 343.6,98.0 345.7,83.2 347.8,100.8 349.9,84.3 352.1,84.0 354.2,83.8 356.3,64.7 358.4,69.8 360.5,74.2 362.7,51.6 364.7,69.8 366.8,82.1 369.0,80.7 371.1,80.7 373.2,86.8 375.3,75.4 377.4,66.1 379.5,71.4 381.6,75.9 383.8,73.4 385.9,76.2 388.0,68.4 390.1,74.2 392.2,84.9 394.3,71.7 396.4,73.1 398.5,44.6 400.7,44.6 402.8,62.8 404.9,223.5 407.0,52.4 409.1,74.0 411.2,73.1 413.3,65.8 415.5,37.8 417.6,70.6 419.7,63.6 421.8,70.3 423.9,69.2 426.0,69.5 428.1,72.6 430.2,67.5 432.4,63.6 434.5,60.0 436.6,66.4 438.7,68.9 440.8,77.6 442.9,65.8 445.0,74.2 447.1,73.7 449.3,70.3 451.4,79.6 453.5,75.9 455.6,74.8 457.7,80.1 459.8,87.7 461.9,48.5 464.0,80.1 466.2,86.0 468.3,81.5 470.4,81.5 472.5,162.7 474.6,59.7 476.7,74.5 478.8,135.0 481.0,64.4 753.5,198.0 755.6,74.2 757.7,75.1 759.9,79.3 762.0,65.6 764.1,67.0 766.2,82.6 768.3,82.4 770.4,79.8 772.5,52.7 774.6,83.2 776.8,65.8 778.9,91.6 781.0,95.0 783.1,90.8 785.2,103.1 787.3,92.2 789.4,90.2 791.5,86.6 793.7,77.3 795.8,82.6 797.9,82.1 800.0,71.7" fill="none" stroke="var(--s3)" stroke-width="2" stroke-linejoin="round" opacity="0.85"/>
 <circle cx="52.0" cy="86.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  244,7 V  —  13.08.2026 00:28:06</title></circle>
-<circle cx="56.3" cy="81.0" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,8 V  —  13.08.2026 00:40:13</title></circle>
-<circle cx="307.0" cy="58.6" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  254,8 V  —  13.08.2026 12:34:28  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="309.1" cy="74.5" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,1 V  —  13.08.2026 12:40:31</title></circle>
-<circle cx="311.3" cy="82.1" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,4 V  —  13.08.2026 12:46:34</title></circle>
-<circle cx="313.4" cy="74.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,0 V  —  13.08.2026 12:52:37</title></circle>
-<circle cx="315.5" cy="79.0" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  247,5 V  —  13.08.2026 12:58:41</title></circle>
-<circle cx="317.6" cy="86.0" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  245,0 V  —  13.08.2026 13:04:44</title></circle>
-<circle cx="319.8" cy="77.3" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  248,1 V  —  13.08.2026 13:10:48</title></circle>
-<circle cx="321.9" cy="108.1" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  237,1 V  —  13.08.2026 13:16:50</title></circle>
-<circle cx="324.0" cy="75.9" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  248,6 V  —  13.08.2026 13:22:54</title></circle>
-<circle cx="326.1" cy="90.2" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  243,5 V  —  13.08.2026 13:28:57</title></circle>
-<circle cx="328.3" cy="86.3" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  244,9 V  —  13.08.2026 13:35:00</title></circle>
-<circle cx="330.4" cy="93.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  242,2 V  —  13.08.2026 13:41:03</title></circle>
-<circle cx="332.5" cy="84.9" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  245,4 V  —  13.08.2026 13:47:06</title></circle>
-<circle cx="334.6" cy="84.3" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  245,6 V  —  13.08.2026 13:53:09</title></circle>
-<circle cx="336.8" cy="75.9" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  248,6 V  —  13.08.2026 13:59:13</title></circle>
-<circle cx="338.9" cy="95.2" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  241,7 V  —  13.08.2026 14:05:16</title></circle>
-<circle cx="341.0" cy="92.7" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  242,6 V  —  13.08.2026 14:11:19</title></circle>
-<circle cx="343.1" cy="98.3" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  240,6 V  —  13.08.2026 14:17:22</title></circle>
-<circle cx="345.3" cy="98.0" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  240,7 V  —  13.08.2026 14:23:25</title></circle>
-<circle cx="347.4" cy="83.2" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,0 V  —  13.08.2026 14:29:29</title></circle>
-<circle cx="349.5" cy="100.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  239,7 V  —  13.08.2026 14:35:32</title></circle>
-<circle cx="351.6" cy="84.3" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  245,6 V  —  13.08.2026 14:41:35</title></circle>
-<circle cx="353.8" cy="84.0" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  245,7 V  —  13.08.2026 14:47:38</title></circle>
-<circle cx="355.9" cy="83.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  245,8 V  —  13.08.2026 14:53:41</title></circle>
-<circle cx="358.0" cy="64.7" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  252,6 V  —  13.08.2026 14:59:44</title></circle>
-<circle cx="360.1" cy="69.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  250,8 V  —  13.08.2026 15:05:48</title></circle>
-<circle cx="362.3" cy="74.2" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,2 V  —  13.08.2026 15:11:51</title></circle>
-<circle cx="364.4" cy="51.6" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  257,3 V  —  13.08.2026 15:18:00  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="366.5" cy="69.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  250,8 V  —  13.08.2026 15:23:57</title></circle>
-<circle cx="368.6" cy="82.1" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,4 V  —  13.08.2026 15:30:00</title></circle>
-<circle cx="370.8" cy="80.7" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,9 V  —  13.08.2026 15:36:03</title></circle>
-<circle cx="372.9" cy="80.7" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,9 V  —  13.08.2026 15:42:07</title></circle>
-<circle cx="375.0" cy="86.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  244,7 V  —  13.08.2026 15:48:10</title></circle>
-<circle cx="377.1" cy="75.4" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  248,8 V  —  13.08.2026 15:54:13</title></circle>
-<circle cx="379.3" cy="66.1" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  252,1 V  —  13.08.2026 16:00:16</title></circle>
-<circle cx="381.4" cy="71.4" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  250,2 V  —  13.08.2026 16:06:19</title></circle>
-<circle cx="383.5" cy="75.9" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  248,6 V  —  13.08.2026 16:12:22</title></circle>
-<circle cx="385.6" cy="73.4" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,5 V  —  13.08.2026 16:18:26</title></circle>
-<circle cx="387.8" cy="76.2" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  248,5 V  —  13.08.2026 16:24:29</title></circle>
-<circle cx="389.9" cy="68.4" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  251,3 V  —  13.08.2026 16:30:32</title></circle>
-<circle cx="392.0" cy="74.2" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,2 V  —  13.08.2026 16:36:35</title></circle>
-<circle cx="394.1" cy="84.9" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  245,4 V  —  13.08.2026 16:42:38</title></circle>
-<circle cx="396.3" cy="71.7" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  250,1 V  —  13.08.2026 16:48:42</title></circle>
-<circle cx="398.4" cy="73.1" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,6 V  —  13.08.2026 16:54:45</title></circle>
-<circle cx="400.5" cy="44.6" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  259,8 V  —  13.08.2026 17:00:48  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="402.6" cy="44.6" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  259,8 V  —  13.08.2026 17:06:51  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="404.8" cy="62.8" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  253,3 V  —  13.08.2026 17:12:55  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="406.9" cy="223.5" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  195,9 V  —  13.08.2026 17:18:58  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="409.0" cy="52.4" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  257,0 V  —  13.08.2026 17:25:01  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="411.1" cy="74.0" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,3 V  —  13.08.2026 17:31:04</title></circle>
-<circle cx="413.3" cy="73.1" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,6 V  —  13.08.2026 17:37:07</title></circle>
-<circle cx="415.4" cy="65.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  252,2 V  —  13.08.2026 17:43:11</title></circle>
-<circle cx="417.5" cy="37.8" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  262,2 V  —  13.08.2026 17:49:14  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="419.6" cy="70.6" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  250,5 V  —  13.08.2026 17:55:17</title></circle>
-<circle cx="421.8" cy="63.6" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  253,0 V  —  13.08.2026 18:01:20</title></circle>
-<circle cx="423.9" cy="70.3" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  250,6 V  —  13.08.2026 18:07:23</title></circle>
-<circle cx="426.0" cy="69.2" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  251,0 V  —  13.08.2026 18:13:32</title></circle>
-<circle cx="428.1" cy="69.5" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  250,9 V  —  13.08.2026 18:19:29</title></circle>
-<circle cx="430.3" cy="72.6" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,8 V  —  13.08.2026 18:25:33</title></circle>
-<circle cx="432.4" cy="67.5" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  251,6 V  —  13.08.2026 18:31:36</title></circle>
-<circle cx="434.5" cy="63.6" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  253,0 V  —  13.08.2026 18:37:39</title></circle>
-<circle cx="436.6" cy="60.0" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  254,3 V  —  13.08.2026 18:43:42  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="438.8" cy="66.4" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  252,0 V  —  13.08.2026 18:49:45</title></circle>
-<circle cx="440.9" cy="68.9" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  251,1 V  —  13.08.2026 18:55:48</title></circle>
-<circle cx="443.0" cy="77.6" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  248,0 V  —  13.08.2026 19:01:51</title></circle>
-<circle cx="445.1" cy="65.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  252,2 V  —  13.08.2026 19:07:55</title></circle>
-<circle cx="447.3" cy="74.2" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,2 V  —  13.08.2026 19:13:58</title></circle>
-<circle cx="449.4" cy="73.7" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,4 V  —  13.08.2026 19:20:01</title></circle>
-<circle cx="451.5" cy="70.3" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  250,6 V  —  13.08.2026 19:26:04</title></circle>
-<circle cx="453.6" cy="79.6" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  247,3 V  —  13.08.2026 19:32:07</title></circle>
-<circle cx="455.8" cy="75.9" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  248,6 V  —  13.08.2026 19:38:10</title></circle>
-<circle cx="457.9" cy="74.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,0 V  —  13.08.2026 19:44:13</title></circle>
-<circle cx="460.0" cy="80.1" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  247,1 V  —  13.08.2026 19:50:16</title></circle>
-<circle cx="462.1" cy="87.7" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  244,4 V  —  13.08.2026 19:56:20</title></circle>
-<circle cx="464.3" cy="48.5" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  258,4 V  —  13.08.2026 20:02:23  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="466.4" cy="80.1" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  247,1 V  —  13.08.2026 20:08:26</title></circle>
-<circle cx="468.5" cy="86.0" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  245,0 V  —  13.08.2026 20:14:29</title></circle>
-<circle cx="470.6" cy="81.5" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,6 V  —  13.08.2026 20:20:32</title></circle>
-<circle cx="472.8" cy="81.5" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,6 V  —  13.08.2026 20:26:35</title></circle>
-<circle cx="474.9" cy="162.7" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  217,6 V  —  13.08.2026 20:32:38</title></circle>
-<circle cx="477.0" cy="59.7" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  254,4 V  —  13.08.2026 20:38:42  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="479.1" cy="74.5" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,1 V  —  13.08.2026 20:44:45</title></circle>
-<circle cx="481.3" cy="135.0" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  227,5 V  —  13.08.2026 20:50:48</title></circle>
-<circle cx="483.4" cy="64.4" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  252,7 V  —  13.08.2026 20:56:51</title></circle>
-<circle cx="757.5" cy="198.0" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  205,0 V  —  14.08.2026 09:57:37  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="759.6" cy="74.2" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,2 V  —  14.08.2026 10:03:40</title></circle>
-<circle cx="761.8" cy="75.1" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  248,9 V  —  14.08.2026 10:09:44</title></circle>
-<circle cx="763.9" cy="79.3" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  247,4 V  —  14.08.2026 10:15:47</title></circle>
-<circle cx="766.0" cy="65.6" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  252,3 V  —  14.08.2026 10:21:50</title></circle>
-<circle cx="768.1" cy="67.0" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  251,8 V  —  14.08.2026 10:27:53</title></circle>
-<circle cx="770.2" cy="82.6" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,2 V  —  14.08.2026 10:33:56</title></circle>
-<circle cx="772.4" cy="82.4" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,3 V  —  14.08.2026 10:39:59</title></circle>
-<circle cx="774.5" cy="79.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  247,2 V  —  14.08.2026 10:46:02</title></circle>
-<circle cx="776.6" cy="52.7" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  256,9 V  —  14.08.2026 10:52:06  (ÎN AFARA LIMITELOR)</title></circle>
-<circle cx="778.7" cy="83.2" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,0 V  —  14.08.2026 10:58:09</title></circle>
-<circle cx="780.9" cy="65.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  252,2 V  —  14.08.2026 11:04:12</title></circle>
-<circle cx="783.0" cy="91.6" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  243,0 V  —  14.08.2026 11:10:15</title></circle>
-<circle cx="785.1" cy="95.0" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  241,8 V  —  14.08.2026 11:16:19</title></circle>
-<circle cx="787.3" cy="90.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  243,3 V  —  14.08.2026 11:22:22</title></circle>
-<circle cx="789.4" cy="103.1" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  238,9 V  —  14.08.2026 11:28:25</title></circle>
-<circle cx="791.5" cy="92.2" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  242,8 V  —  14.08.2026 11:34:28</title></circle>
-<circle cx="793.6" cy="90.2" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  243,5 V  —  14.08.2026 11:40:31</title></circle>
-<circle cx="795.7" cy="86.6" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  244,8 V  —  14.08.2026 11:46:34</title></circle>
-<circle cx="797.9" cy="77.3" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  248,1 V  —  14.08.2026 11:52:37</title></circle>
-<circle cx="800.0" cy="82.6" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,2 V  —  14.08.2026 11:58:41</title></circle>
-<text x="812.0" y="86.6" class="dlab" fill="var(--s3)">L3</text>
+<circle cx="56.2" cy="81.0" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,8 V  —  13.08.2026 00:40:13</title></circle>
+<circle cx="305.6" cy="58.6" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  254,8 V  —  13.08.2026 12:34:28  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="307.7" cy="74.5" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,1 V  —  13.08.2026 12:40:31</title></circle>
+<circle cx="309.8" cy="82.1" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,4 V  —  13.08.2026 12:46:34</title></circle>
+<circle cx="311.9" cy="74.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,0 V  —  13.08.2026 12:52:37</title></circle>
+<circle cx="314.0" cy="79.0" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  247,5 V  —  13.08.2026 12:58:41</title></circle>
+<circle cx="316.1" cy="86.0" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  245,0 V  —  13.08.2026 13:04:44</title></circle>
+<circle cx="318.3" cy="77.3" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  248,1 V  —  13.08.2026 13:10:48</title></circle>
+<circle cx="320.4" cy="108.1" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  237,1 V  —  13.08.2026 13:16:50</title></circle>
+<circle cx="322.5" cy="75.9" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  248,6 V  —  13.08.2026 13:22:54</title></circle>
+<circle cx="324.6" cy="90.2" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  243,5 V  —  13.08.2026 13:28:57</title></circle>
+<circle cx="326.7" cy="86.3" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  244,9 V  —  13.08.2026 13:35:00</title></circle>
+<circle cx="328.8" cy="93.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  242,2 V  —  13.08.2026 13:41:03</title></circle>
+<circle cx="330.9" cy="84.9" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  245,4 V  —  13.08.2026 13:47:06</title></circle>
+<circle cx="333.0" cy="84.3" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  245,6 V  —  13.08.2026 13:53:09</title></circle>
+<circle cx="335.2" cy="75.9" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  248,6 V  —  13.08.2026 13:59:13</title></circle>
+<circle cx="337.3" cy="95.2" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  241,7 V  —  13.08.2026 14:05:16</title></circle>
+<circle cx="339.4" cy="92.7" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  242,6 V  —  13.08.2026 14:11:19</title></circle>
+<circle cx="341.5" cy="98.3" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  240,6 V  —  13.08.2026 14:17:22</title></circle>
+<circle cx="343.6" cy="98.0" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  240,7 V  —  13.08.2026 14:23:25</title></circle>
+<circle cx="345.7" cy="83.2" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,0 V  —  13.08.2026 14:29:29</title></circle>
+<circle cx="347.8" cy="100.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  239,7 V  —  13.08.2026 14:35:32</title></circle>
+<circle cx="349.9" cy="84.3" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  245,6 V  —  13.08.2026 14:41:35</title></circle>
+<circle cx="352.1" cy="84.0" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  245,7 V  —  13.08.2026 14:47:38</title></circle>
+<circle cx="354.2" cy="83.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  245,8 V  —  13.08.2026 14:53:41</title></circle>
+<circle cx="356.3" cy="64.7" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  252,6 V  —  13.08.2026 14:59:44</title></circle>
+<circle cx="358.4" cy="69.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  250,8 V  —  13.08.2026 15:05:48</title></circle>
+<circle cx="360.5" cy="74.2" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,2 V  —  13.08.2026 15:11:51</title></circle>
+<circle cx="362.7" cy="51.6" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  257,3 V  —  13.08.2026 15:18:00  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="364.7" cy="69.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  250,8 V  —  13.08.2026 15:23:57</title></circle>
+<circle cx="366.8" cy="82.1" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,4 V  —  13.08.2026 15:30:00</title></circle>
+<circle cx="369.0" cy="80.7" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,9 V  —  13.08.2026 15:36:03</title></circle>
+<circle cx="371.1" cy="80.7" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,9 V  —  13.08.2026 15:42:07</title></circle>
+<circle cx="373.2" cy="86.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  244,7 V  —  13.08.2026 15:48:10</title></circle>
+<circle cx="375.3" cy="75.4" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  248,8 V  —  13.08.2026 15:54:13</title></circle>
+<circle cx="377.4" cy="66.1" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  252,1 V  —  13.08.2026 16:00:16</title></circle>
+<circle cx="379.5" cy="71.4" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  250,2 V  —  13.08.2026 16:06:19</title></circle>
+<circle cx="381.6" cy="75.9" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  248,6 V  —  13.08.2026 16:12:22</title></circle>
+<circle cx="383.8" cy="73.4" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,5 V  —  13.08.2026 16:18:26</title></circle>
+<circle cx="385.9" cy="76.2" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  248,5 V  —  13.08.2026 16:24:29</title></circle>
+<circle cx="388.0" cy="68.4" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  251,3 V  —  13.08.2026 16:30:32</title></circle>
+<circle cx="390.1" cy="74.2" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,2 V  —  13.08.2026 16:36:35</title></circle>
+<circle cx="392.2" cy="84.9" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  245,4 V  —  13.08.2026 16:42:38</title></circle>
+<circle cx="394.3" cy="71.7" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  250,1 V  —  13.08.2026 16:48:42</title></circle>
+<circle cx="396.4" cy="73.1" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,6 V  —  13.08.2026 16:54:45</title></circle>
+<circle cx="398.5" cy="44.6" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  259,8 V  —  13.08.2026 17:00:48  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="400.7" cy="44.6" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  259,8 V  —  13.08.2026 17:06:51  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="402.8" cy="62.8" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  253,3 V  —  13.08.2026 17:12:55  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="404.9" cy="223.5" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  195,9 V  —  13.08.2026 17:18:58  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="407.0" cy="52.4" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  257,0 V  —  13.08.2026 17:25:01  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="409.1" cy="74.0" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,3 V  —  13.08.2026 17:31:04</title></circle>
+<circle cx="411.2" cy="73.1" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,6 V  —  13.08.2026 17:37:07</title></circle>
+<circle cx="413.3" cy="65.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  252,2 V  —  13.08.2026 17:43:11</title></circle>
+<circle cx="415.5" cy="37.8" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  262,2 V  —  13.08.2026 17:49:14  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="417.6" cy="70.6" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  250,5 V  —  13.08.2026 17:55:17</title></circle>
+<circle cx="419.7" cy="63.6" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  253,0 V  —  13.08.2026 18:01:20</title></circle>
+<circle cx="421.8" cy="70.3" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  250,6 V  —  13.08.2026 18:07:23</title></circle>
+<circle cx="423.9" cy="69.2" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  251,0 V  —  13.08.2026 18:13:32</title></circle>
+<circle cx="426.0" cy="69.5" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  250,9 V  —  13.08.2026 18:19:29</title></circle>
+<circle cx="428.1" cy="72.6" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,8 V  —  13.08.2026 18:25:33</title></circle>
+<circle cx="430.2" cy="67.5" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  251,6 V  —  13.08.2026 18:31:36</title></circle>
+<circle cx="432.4" cy="63.6" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  253,0 V  —  13.08.2026 18:37:39</title></circle>
+<circle cx="434.5" cy="60.0" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  254,3 V  —  13.08.2026 18:43:42  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="436.6" cy="66.4" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  252,0 V  —  13.08.2026 18:49:45</title></circle>
+<circle cx="438.7" cy="68.9" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  251,1 V  —  13.08.2026 18:55:48</title></circle>
+<circle cx="440.8" cy="77.6" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  248,0 V  —  13.08.2026 19:01:51</title></circle>
+<circle cx="442.9" cy="65.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  252,2 V  —  13.08.2026 19:07:55</title></circle>
+<circle cx="445.0" cy="74.2" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,2 V  —  13.08.2026 19:13:58</title></circle>
+<circle cx="447.1" cy="73.7" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,4 V  —  13.08.2026 19:20:01</title></circle>
+<circle cx="449.3" cy="70.3" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  250,6 V  —  13.08.2026 19:26:04</title></circle>
+<circle cx="451.4" cy="79.6" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  247,3 V  —  13.08.2026 19:32:07</title></circle>
+<circle cx="453.5" cy="75.9" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  248,6 V  —  13.08.2026 19:38:10</title></circle>
+<circle cx="455.6" cy="74.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,0 V  —  13.08.2026 19:44:13</title></circle>
+<circle cx="457.7" cy="80.1" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  247,1 V  —  13.08.2026 19:50:16</title></circle>
+<circle cx="459.8" cy="87.7" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  244,4 V  —  13.08.2026 19:56:20</title></circle>
+<circle cx="461.9" cy="48.5" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  258,4 V  —  13.08.2026 20:02:23  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="464.0" cy="80.1" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  247,1 V  —  13.08.2026 20:08:26</title></circle>
+<circle cx="466.2" cy="86.0" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  245,0 V  —  13.08.2026 20:14:29</title></circle>
+<circle cx="468.3" cy="81.5" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,6 V  —  13.08.2026 20:20:32</title></circle>
+<circle cx="470.4" cy="81.5" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,6 V  —  13.08.2026 20:26:35</title></circle>
+<circle cx="472.5" cy="162.7" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  217,6 V  —  13.08.2026 20:32:38</title></circle>
+<circle cx="474.6" cy="59.7" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  254,4 V  —  13.08.2026 20:38:42  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="476.7" cy="74.5" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,1 V  —  13.08.2026 20:44:45</title></circle>
+<circle cx="478.8" cy="135.0" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  227,5 V  —  13.08.2026 20:50:48</title></circle>
+<circle cx="481.0" cy="64.4" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  252,7 V  —  13.08.2026 20:56:51</title></circle>
+<circle cx="753.5" cy="198.0" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  205,0 V  —  14.08.2026 09:57:37  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="755.6" cy="74.2" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  249,2 V  —  14.08.2026 10:03:40</title></circle>
+<circle cx="757.7" cy="75.1" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  248,9 V  —  14.08.2026 10:09:44</title></circle>
+<circle cx="759.9" cy="79.3" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  247,4 V  —  14.08.2026 10:15:47</title></circle>
+<circle cx="762.0" cy="65.6" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  252,3 V  —  14.08.2026 10:21:50</title></circle>
+<circle cx="764.1" cy="67.0" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  251,8 V  —  14.08.2026 10:27:53</title></circle>
+<circle cx="766.2" cy="82.6" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,2 V  —  14.08.2026 10:33:56</title></circle>
+<circle cx="768.3" cy="82.4" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,3 V  —  14.08.2026 10:39:59</title></circle>
+<circle cx="770.4" cy="79.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  247,2 V  —  14.08.2026 10:46:02</title></circle>
+<circle cx="772.5" cy="52.7" r="5" fill="var(--s3)" stroke="var(--crit)" stroke-width="2.5"><title>L3  256,9 V  —  14.08.2026 10:52:06  (ÎN AFARA LIMITELOR)</title></circle>
+<circle cx="774.6" cy="83.2" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,0 V  —  14.08.2026 10:58:09</title></circle>
+<circle cx="776.8" cy="65.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  252,2 V  —  14.08.2026 11:04:12</title></circle>
+<circle cx="778.9" cy="91.6" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  243,0 V  —  14.08.2026 11:10:15</title></circle>
+<circle cx="781.0" cy="95.0" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  241,8 V  —  14.08.2026 11:16:19</title></circle>
+<circle cx="783.1" cy="90.8" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  243,3 V  —  14.08.2026 11:22:22</title></circle>
+<circle cx="785.2" cy="103.1" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  238,9 V  —  14.08.2026 11:28:25</title></circle>
+<circle cx="787.3" cy="92.2" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  242,8 V  —  14.08.2026 11:34:28</title></circle>
+<circle cx="789.4" cy="90.2" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  243,5 V  —  14.08.2026 11:40:31</title></circle>
+<circle cx="791.5" cy="86.6" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  244,8 V  —  14.08.2026 11:46:34</title></circle>
+<circle cx="793.7" cy="77.3" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  248,1 V  —  14.08.2026 11:52:37</title></circle>
+<circle cx="795.8" cy="82.6" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,2 V  —  14.08.2026 11:58:41</title></circle>
+<circle cx="797.9" cy="82.1" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  246,4 V  —  14.08.2026 12:04:44</title></circle>
+<circle cx="800.0" cy="71.7" r="4" fill="var(--s3)" stroke="var(--surf)" stroke-width="1.5"><title>L3  250,1 V  —  14.08.2026 12:10:47</title></circle>
+<text x="812.0" y="75.7" class="dlab" fill="var(--s3)">L3</text>
 <line x1="52" y1="380" x2="800" y2="380" stroke="var(--axis)" stroke-width="1"/>
 </svg>
 <p class="note">Banda verde pală = plaja admisă 207–253 V. Linia punctată roșie =
@@ -434,38 +444,42 @@ limitelor. Fiecare punct are detalii la hover.</p>
 
 <div class="card">
 <h2 style="font-size:18px;margin:0 0 10px">Măsurători în afara limitelor</h2>
-<table>
-<tr><th>Data / ora</th><th>Faza</th><th>Tensiune</th><th>Curent</th><th>Putere</th><th>Încadrare</th></tr>
-<tr><td>13.08.2026 12:34:28</td><td>L3</td><td class='bad'>254,8 V</td><td>0,148 A</td><td>0 W</td><td>peste +10%</td></tr>
-<tr><td>13.08.2026 15:18:00</td><td>L3</td><td class='bad'>257,3 V</td><td>0,149 A</td><td>0 W</td><td>peste +10%</td></tr>
-<tr><td>13.08.2026 17:00:48</td><td>L1</td><td class='bad'>196,2 V</td><td>11,319 A</td><td>2071 W</td><td>sub −10%</td></tr>
-<tr><td>13.08.2026 17:00:48</td><td>L2</td><td class='bad'>197,4 V</td><td>0,041 A</td><td>0 W</td><td>sub −10%</td></tr>
-<tr><td>13.08.2026 17:00:48</td><td>L3</td><td class='bad'>259,8 V</td><td>0,150 A</td><td>0 W</td><td>peste +10%</td></tr>
-<tr><td>13.08.2026 17:06:51</td><td>L3</td><td class='bad'>259,8 V</td><td>0,150 A</td><td>0 W</td><td>peste +10%</td></tr>
-<tr><td>13.08.2026 17:12:55</td><td>L3</td><td class='bad'>253,3 V</td><td>0,146 A</td><td>0 W</td><td>peste +10%</td></tr>
-<tr><td>13.08.2026 17:18:58</td><td>L3</td><td class='bad'>195,9 V</td><td>28,800 A</td><td>5387 W</td><td>sub −10%</td></tr>
-<tr><td>13.08.2026 17:25:01</td><td>L3</td><td class='bad'>257,0 V</td><td>0,148 A</td><td>0 W</td><td>peste +10%</td></tr>
-<tr><td>13.08.2026 17:49:14</td><td>L3</td><td class='bad'>262,2 V</td><td>0,152 A</td><td>0 W</td><td>peste +10%</td></tr>
-<tr><td>13.08.2026 18:43:42</td><td>L1</td><td class='bad'>206,0 V</td><td>6,048 A</td><td>1220 W</td><td>sub −10%</td></tr>
-<tr><td>13.08.2026 18:43:42</td><td>L2</td><td class='bad'>206,7 V</td><td>0,043 A</td><td>0 W</td><td>sub −10%</td></tr>
-<tr><td>13.08.2026 18:43:42</td><td>L3</td><td class='bad'>254,3 V</td><td>0,147 A</td><td>0 W</td><td>peste +10%</td></tr>
-<tr><td>13.08.2026 18:55:48</td><td>L1</td><td class='bad'>190,7 V</td><td>4,955 A</td><td>931 W</td><td>sub −15% (absolută!)</td></tr>
-<tr><td>13.08.2026 18:55:48</td><td>L2</td><td class='bad'>191,2 V</td><td>0,040 A</td><td>0 W</td><td>sub −15% (absolută!)</td></tr>
-<tr><td>13.08.2026 20:02:23</td><td>L1</td><td class='bad'>181,2 V</td><td>2,378 A</td><td>329 W</td><td>sub −15% (absolută!)</td></tr>
-<tr><td>13.08.2026 20:02:23</td><td>L2</td><td class='bad'>178,0 V</td><td>28,741 A</td><td>5291 W</td><td>sub −15% (absolută!)</td></tr>
-<tr><td>13.08.2026 20:02:23</td><td>L3</td><td class='bad'>258,4 V</td><td>0,470 A</td><td>120 W</td><td>peste +10%</td></tr>
-<tr><td>13.08.2026 20:20:32</td><td>L1</td><td class='bad'>179,3 V</td><td>3,035 A</td><td>473 W</td><td>sub −15% (absolută!)</td></tr>
-<tr><td>13.08.2026 20:20:32</td><td>L2</td><td class='bad'>176,2 V</td><td>28,438 A</td><td>5034 W</td><td>sub −15% (absolută!)</td></tr>
-<tr><td>13.08.2026 20:38:42</td><td>L3</td><td class='bad'>254,4 V</td><td>0,147 A</td><td>0 W</td><td>peste +10%</td></tr>
-<tr><td>14.08.2026 09:57:37</td><td>L1</td><td class='bad'>201,0 V</td><td>1,723 A</td><td>281 W</td><td>sub −10%</td></tr>
-<tr><td>14.08.2026 09:57:37</td><td>L2</td><td class='bad'>197,4 V</td><td>31,899 A</td><td>6343 W</td><td>sub −10%</td></tr>
-<tr><td>14.08.2026 09:57:37</td><td>L3</td><td class='bad'>205,0 V</td><td>30,917 A</td><td>5973 W</td><td>sub −10%</td></tr>
-<tr><td>14.08.2026 10:09:44</td><td>L1</td><td class='bad'>156,0 V</td><td>2,137 A</td><td>240 W</td><td>sub −15% (absolută!)</td></tr>
-<tr><td>14.08.2026 10:09:44</td><td>L2</td><td class='bad'>153,4 V</td><td>23,707 A</td><td>3661 W</td><td>sub −15% (absolută!)</td></tr>
-<tr><td>14.08.2026 10:21:50</td><td>L1</td><td class='bad'>198,9 V</td><td>1,924 A</td><td>313 W</td><td>sub −10%</td></tr>
-<tr><td>14.08.2026 10:21:50</td><td>L2</td><td class='bad'>199,1 V</td><td>0,041 A</td><td>0 W</td><td>sub −10%</td></tr>
-<tr><td>14.08.2026 10:52:06</td><td>L3</td><td class='bad'>256,9 V</td><td>0,148 A</td><td>0 W</td><td>peste +10%</td></tr>
+<table class="sortable">
+<thead><tr><th data-s>Data / ora</th><th data-s>Faza</th><th data-s>Tensiune</th>
+<th data-s>Curent</th><th data-s>Putere</th><th>Încadrare</th></tr></thead>
+<tbody>
+<tr><td data-v='1786613668.0'>13.08.2026 12:34:28</td><td>L3</td><td class='bad' data-v='254.8'>254,8 V</td><td data-v='0.148'>0,148 A</td><td data-v='0.0'>0 W</td><td>peste +10%</td></tr>
+<tr><td data-v='1786623480.0'>13.08.2026 15:18:00</td><td>L3</td><td class='bad' data-v='257.3'>257,3 V</td><td data-v='0.149'>0,149 A</td><td data-v='0.0'>0 W</td><td>peste +10%</td></tr>
+<tr><td data-v='1786629648.0'>13.08.2026 17:00:48</td><td>L1</td><td class='bad' data-v='196.2'>196,2 V</td><td data-v='11.319'>11,319 A</td><td data-v='2071.0'>2071 W</td><td>sub −10%</td></tr>
+<tr><td data-v='1786629648.0'>13.08.2026 17:00:48</td><td>L2</td><td class='bad' data-v='197.4'>197,4 V</td><td data-v='0.041'>0,041 A</td><td data-v='0.0'>0 W</td><td>sub −10%</td></tr>
+<tr><td data-v='1786629648.0'>13.08.2026 17:00:48</td><td>L3</td><td class='bad' data-v='259.8'>259,8 V</td><td data-v='0.15'>0,150 A</td><td data-v='0.0'>0 W</td><td>peste +10%</td></tr>
+<tr><td data-v='1786630011.0'>13.08.2026 17:06:51</td><td>L3</td><td class='bad' data-v='259.8'>259,8 V</td><td data-v='0.15'>0,150 A</td><td data-v='0.0'>0 W</td><td>peste +10%</td></tr>
+<tr><td data-v='1786630375.0'>13.08.2026 17:12:55</td><td>L3</td><td class='bad' data-v='253.3'>253,3 V</td><td data-v='0.146'>0,146 A</td><td data-v='0.0'>0 W</td><td>peste +10%</td></tr>
+<tr><td data-v='1786630738.0'>13.08.2026 17:18:58</td><td>L3</td><td class='bad' data-v='195.9'>195,9 V</td><td data-v='28.8'>28,800 A</td><td data-v='5387.0'>5387 W</td><td>sub −10%</td></tr>
+<tr><td data-v='1786631101.0'>13.08.2026 17:25:01</td><td>L3</td><td class='bad' data-v='257.0'>257,0 V</td><td data-v='0.148'>0,148 A</td><td data-v='0.0'>0 W</td><td>peste +10%</td></tr>
+<tr><td data-v='1786632554.0'>13.08.2026 17:49:14</td><td>L3</td><td class='bad' data-v='262.2'>262,2 V</td><td data-v='0.152'>0,152 A</td><td data-v='0.0'>0 W</td><td>peste +10%</td></tr>
+<tr><td data-v='1786635822.0'>13.08.2026 18:43:42</td><td>L1</td><td class='bad' data-v='206.0'>206,0 V</td><td data-v='6.048'>6,048 A</td><td data-v='1220.0'>1220 W</td><td>sub −10%</td></tr>
+<tr><td data-v='1786635822.0'>13.08.2026 18:43:42</td><td>L2</td><td class='bad' data-v='206.7'>206,7 V</td><td data-v='0.043'>0,043 A</td><td data-v='0.0'>0 W</td><td>sub −10%</td></tr>
+<tr><td data-v='1786635822.0'>13.08.2026 18:43:42</td><td>L3</td><td class='bad' data-v='254.3'>254,3 V</td><td data-v='0.147'>0,147 A</td><td data-v='0.0'>0 W</td><td>peste +10%</td></tr>
+<tr><td data-v='1786636548.0'>13.08.2026 18:55:48</td><td>L1</td><td class='bad' data-v='190.7'>190,7 V</td><td data-v='4.955'>4,955 A</td><td data-v='931.0'>931 W</td><td>sub −15% (absolută!)</td></tr>
+<tr><td data-v='1786636548.0'>13.08.2026 18:55:48</td><td>L2</td><td class='bad' data-v='191.2'>191,2 V</td><td data-v='0.04'>0,040 A</td><td data-v='0.0'>0 W</td><td>sub −15% (absolută!)</td></tr>
+<tr><td data-v='1786640543.0'>13.08.2026 20:02:23</td><td>L1</td><td class='bad' data-v='181.2'>181,2 V</td><td data-v='2.378'>2,378 A</td><td data-v='329.0'>329 W</td><td>sub −15% (absolută!)</td></tr>
+<tr><td data-v='1786640543.0'>13.08.2026 20:02:23</td><td>L2</td><td class='bad' data-v='178.0'>178,0 V</td><td data-v='28.741'>28,741 A</td><td data-v='5291.0'>5291 W</td><td>sub −15% (absolută!)</td></tr>
+<tr><td data-v='1786640543.0'>13.08.2026 20:02:23</td><td>L3</td><td class='bad' data-v='258.4'>258,4 V</td><td data-v='0.47'>0,470 A</td><td data-v='120.0'>120 W</td><td>peste +10%</td></tr>
+<tr><td data-v='1786641632.0'>13.08.2026 20:20:32</td><td>L1</td><td class='bad' data-v='179.3'>179,3 V</td><td data-v='3.035'>3,035 A</td><td data-v='473.0'>473 W</td><td>sub −15% (absolută!)</td></tr>
+<tr><td data-v='1786641632.0'>13.08.2026 20:20:32</td><td>L2</td><td class='bad' data-v='176.2'>176,2 V</td><td data-v='28.438'>28,438 A</td><td data-v='5034.0'>5034 W</td><td>sub −15% (absolută!)</td></tr>
+<tr><td data-v='1786642722.0'>13.08.2026 20:38:42</td><td>L3</td><td class='bad' data-v='254.4'>254,4 V</td><td data-v='0.147'>0,147 A</td><td data-v='0.0'>0 W</td><td>peste +10%</td></tr>
+<tr><td data-v='1786690657.0'>14.08.2026 09:57:37</td><td>L1</td><td class='bad' data-v='201.0'>201,0 V</td><td data-v='1.723'>1,723 A</td><td data-v='281.0'>281 W</td><td>sub −10%</td></tr>
+<tr><td data-v='1786690657.0'>14.08.2026 09:57:37</td><td>L2</td><td class='bad' data-v='197.4'>197,4 V</td><td data-v='31.899'>31,899 A</td><td data-v='6343.0'>6343 W</td><td>sub −10%</td></tr>
+<tr><td data-v='1786690657.0'>14.08.2026 09:57:37</td><td>L3</td><td class='bad' data-v='205.0'>205,0 V</td><td data-v='30.917'>30,917 A</td><td data-v='5973.0'>5973 W</td><td>sub −10%</td></tr>
+<tr><td data-v='1786691384.0'>14.08.2026 10:09:44</td><td>L1</td><td class='bad' data-v='156.0'>156,0 V</td><td data-v='2.137'>2,137 A</td><td data-v='240.0'>240 W</td><td>sub −15% (absolută!)</td></tr>
+<tr><td data-v='1786691384.0'>14.08.2026 10:09:44</td><td>L2</td><td class='bad' data-v='153.4'>153,4 V</td><td data-v='23.707'>23,707 A</td><td data-v='3661.0'>3661 W</td><td>sub −15% (absolută!)</td></tr>
+<tr><td data-v='1786692110.0'>14.08.2026 10:21:50</td><td>L1</td><td class='bad' data-v='198.9'>198,9 V</td><td data-v='1.924'>1,924 A</td><td data-v='313.0'>313 W</td><td>sub −10%</td></tr>
+<tr><td data-v='1786692110.0'>14.08.2026 10:21:50</td><td>L2</td><td class='bad' data-v='199.1'>199,1 V</td><td data-v='0.041'>0,041 A</td><td data-v='0.0'>0 W</td><td>sub −10%</td></tr>
+<tr><td data-v='1786693926.0'>14.08.2026 10:52:06</td><td>L3</td><td class='bad' data-v='256.9'>256,9 V</td><td data-v='0.148'>0,148 A</td><td data-v='0.0'>0 W</td><td>peste +10%</td></tr>
+</tbody>
 </table>
+<p class="note">Click pe capetele de coloană pentru sortare.</p>
 </div>
 
 <div class="card">
@@ -473,7 +487,7 @@ limitelor. Fiecare punct are detalii la hover.</p>
 <label class="note" style="display:block;margin-bottom:8px">
   <input type="checkbox" id="doarBad"> doar măsurătorile în afara limitelor
 </label>
-<table id="registru">
+<table id="registru" class="sortable">
 <thead><tr>
   <th data-s>Data / ora</th><th data-s>L1 [V]</th><th data-s>L2 [V]</th>
   <th data-s>L3 [V]</th><th>Curenți L1/L2/L3 [A]</th>
@@ -587,6 +601,8 @@ limitelor. Fiecare punct are detalii la hover.</p>
 <tr data-bad='0'><td data-v='1786697194.0'>14.08.2026 11:46:34</td><td data-v='242.0'>242,0</td><td data-v='242.1'>242,1</td><td data-v='244.8'>244,8</td><td>2,24 / 0,05 / 0,14</td><td>489 / 0 / 0</td><td>39.64</td></tr>
 <tr data-bad='0'><td data-v='1786697557.0'>14.08.2026 11:52:37</td><td data-v='226.1'>226,1</td><td data-v='226.2'>226,2</td><td data-v='248.1'>248,1</td><td>2,15 / 0,05 / 0,14</td><td>449 / 0 / 0</td><td>40.13</td></tr>
 <tr data-bad='0'><td data-v='1786697921.0'>14.08.2026 11:58:41</td><td data-v='230.2'>230,2</td><td data-v='230.4'>230,4</td><td data-v='246.2'>246,2</td><td>2,44 / 0,05 / 0,14</td><td>521 / 0 / 0</td><td>40.22</td></tr>
+<tr data-bad='0'><td data-v='1786698284.0'>14.08.2026 12:04:44</td><td data-v='231.8'>231,8</td><td data-v='232.0'>232,0</td><td data-v='246.4'>246,4</td><td>2,42 / 0,05 / 0,14</td><td>489 / 0 / 0</td><td>40.31</td></tr>
+<tr data-bad='0'><td data-v='1786698647.0'>14.08.2026 12:10:47</td><td data-v='214.9'>214,9</td><td data-v='216.1'>216,1</td><td data-v='250.1'>250,1</td><td>10,94 / 0,04 / 0,14</td><td>2336 / 0 / 0</td><td>40.4</td></tr>
 </tbody>
 </table>
 <p class="note">Click pe capetele de coloană pentru sortare.</p>
@@ -594,25 +610,39 @@ limitelor. Fiecare punct are detalii la hover.</p>
 
 <script>
 (function () {
-  var tb = document.querySelector('#registru tbody');
+  var reg = document.querySelector('#registru tbody');
   document.getElementById('doarBad').addEventListener('change', function () {
     var only = this.checked;
-    tb.querySelectorAll('tr').forEach(function (tr) {
+    reg.querySelectorAll('tr').forEach(function (tr) {
       tr.style.display = (!only || tr.dataset.bad === '1') ? '' : 'none';
     });
   });
-  var dir = 1;
-  document.querySelectorAll('#registru th[data-s]').forEach(function (th, ci) {
-    th.style.cursor = 'pointer';
-    th.addEventListener('click', function () {
-      dir = -dir;
-      Array.from(tb.querySelectorAll('tr'))
-        .sort(function (a, b) {
-          var av = parseFloat(a.cells[ci].dataset.v || a.cells[ci].textContent) || 0;
-          var bv = parseFloat(b.cells[ci].dataset.v || b.cells[ci].textContent) || 0;
-          return (av - bv) * dir;
-        })
-        .forEach(function (tr) { tb.appendChild(tr); });
+  // sortare pe orice tabel .sortable: direcție per coloană + săgeată vizibilă
+  document.querySelectorAll('table.sortable').forEach(function (tbl) {
+    var tb = tbl.querySelector('tbody');
+    var heads = Array.from(tbl.querySelectorAll('thead th'));
+    heads.forEach(function (th, ci) {
+      if (!th.hasAttribute('data-s')) return;
+      th.addEventListener('click', function () {
+        var dir = th.dataset.dir === 'asc' ? -1 : 1;
+        heads.forEach(function (h) { delete h.dataset.dir; });
+        th.dataset.dir = dir === 1 ? 'asc' : 'desc';
+        function key(tr) {
+          var c = tr.cells[ci];
+          if (c.dataset.v !== undefined) return parseFloat(c.dataset.v);
+          var t = c.textContent.trim().replace(',', '.');
+          var n = parseFloat(t);
+          return isNaN(n) ? t : n;
+        }
+        Array.from(tb.querySelectorAll('tr'))
+          .sort(function (a, b) {
+            var ka = key(a), kb = key(b);
+            if (typeof ka === 'string' || typeof kb === 'string')
+              return String(ka).localeCompare(String(kb)) * dir;
+            return (ka - kb) * dir;
+          })
+          .forEach(function (tr) { tb.appendChild(tr); });
+      });
     });
   });
 })();
@@ -623,7 +653,7 @@ valorile raportate de contor la fiecare increment de energie; măsurători
 indicative conform art. 28 — determinarea oficială prin monitorizarea
 operatorului de distribuție. Date brute (CSV cu timestamp) disponibile la cerere.
 Cod sursă: <a href="https://github.com/TeoChirileanu/tuya">github.com/TeoChirileanu/tuya</a>.
-Generat 14.08.2026 12:04.</p>
+Generat 14.08.2026 12:12.</p>
 </main>
 </body>
 </html>

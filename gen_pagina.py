@@ -142,9 +142,9 @@ def main():
     svg.append("</svg>")
 
     viol_rows = "\n".join(
-        f"<tr><td>{ts:%d.%m.%Y %H:%M:%S}</td><td>{name}</td>"
-        f"<td class='bad'>{fnum(v)} V</td><td>{fnum(a,3)} A</td>"
-        f"<td>{watt:.0f} W</td>"
+        f"<tr><td data-v='{ts.timestamp()}'>{ts:%d.%m.%Y %H:%M:%S}</td><td>{name}</td>"
+        f"<td class='bad' data-v='{v}'>{fnum(v)} V</td><td data-v='{a}'>{fnum(a,3)} A</td>"
+        f"<td data-v='{watt}'>{watt:.0f} W</td>"
         f"<td>{'sub −15% (absolută!)' if v < V_ABS_LO else ('sub −10%' if v < V_LO else 'peste +10%')}</td></tr>"
         for ts, name, v, a, watt in violations)
 
@@ -224,6 +224,10 @@ h1 {{ font-size: 24px; margin: 8px 0 4px; }}
 table {{ border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }}
 th, td {{ text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--grid); }}
 th {{ color: var(--ink2); font-weight: 600; font-size: 13px; }}
+th[data-s] {{ cursor: pointer; user-select: none; white-space: nowrap; }}
+th[data-s]::after {{ content: " ⇅"; color: var(--muted); font-size: 11px; }}
+th[data-s][data-dir="asc"]::after {{ content: " ▲"; color: var(--ink); }}
+th[data-s][data-dir="desc"]::after {{ content: " ▼"; color: var(--ink); }}
 td.bad {{ color: var(--crit); font-weight: 700; }}
 .note {{ color: var(--ink2); font-size: 13px; }}
 a {{ color: var(--s1); }}
@@ -254,10 +258,14 @@ limitelor. Fiecare punct are detalii la hover.</p>
 
 <div class="card">
 <h2 style="font-size:18px;margin:0 0 10px">Măsurători în afara limitelor</h2>
-<table>
-<tr><th>Data / ora</th><th>Faza</th><th>Tensiune</th><th>Curent</th><th>Putere</th><th>Încadrare</th></tr>
+<table class="sortable">
+<thead><tr><th data-s>Data / ora</th><th data-s>Faza</th><th data-s>Tensiune</th>
+<th data-s>Curent</th><th data-s>Putere</th><th>Încadrare</th></tr></thead>
+<tbody>
 {viol_rows}
+</tbody>
 </table>
+<p class="note">Click pe capetele de coloană pentru sortare.</p>
 </div>
 
 <div class="card">
@@ -265,7 +273,7 @@ limitelor. Fiecare punct are detalii la hover.</p>
 <label class="note" style="display:block;margin-bottom:8px">
   <input type="checkbox" id="doarBad"> doar măsurătorile în afara limitelor
 </label>
-<table id="registru">
+<table id="registru" class="sortable">
 <thead><tr>
   <th data-s>Data / ora</th><th data-s>L1 [V]</th><th data-s>L2 [V]</th>
   <th data-s>L3 [V]</th><th>Curenți L1/L2/L3 [A]</th>
@@ -280,25 +288,39 @@ limitelor. Fiecare punct are detalii la hover.</p>
 
 <script>
 (function () {{
-  var tb = document.querySelector('#registru tbody');
+  var reg = document.querySelector('#registru tbody');
   document.getElementById('doarBad').addEventListener('change', function () {{
     var only = this.checked;
-    tb.querySelectorAll('tr').forEach(function (tr) {{
+    reg.querySelectorAll('tr').forEach(function (tr) {{
       tr.style.display = (!only || tr.dataset.bad === '1') ? '' : 'none';
     }});
   }});
-  var dir = 1;
-  document.querySelectorAll('#registru th[data-s]').forEach(function (th, ci) {{
-    th.style.cursor = 'pointer';
-    th.addEventListener('click', function () {{
-      dir = -dir;
-      Array.from(tb.querySelectorAll('tr'))
-        .sort(function (a, b) {{
-          var av = parseFloat(a.cells[ci].dataset.v || a.cells[ci].textContent) || 0;
-          var bv = parseFloat(b.cells[ci].dataset.v || b.cells[ci].textContent) || 0;
-          return (av - bv) * dir;
-        }})
-        .forEach(function (tr) {{ tb.appendChild(tr); }});
+  // sortare pe orice tabel .sortable: direcție per coloană + săgeată vizibilă
+  document.querySelectorAll('table.sortable').forEach(function (tbl) {{
+    var tb = tbl.querySelector('tbody');
+    var heads = Array.from(tbl.querySelectorAll('thead th'));
+    heads.forEach(function (th, ci) {{
+      if (!th.hasAttribute('data-s')) return;
+      th.addEventListener('click', function () {{
+        var dir = th.dataset.dir === 'asc' ? -1 : 1;
+        heads.forEach(function (h) {{ delete h.dataset.dir; }});
+        th.dataset.dir = dir === 1 ? 'asc' : 'desc';
+        function key(tr) {{
+          var c = tr.cells[ci];
+          if (c.dataset.v !== undefined) return parseFloat(c.dataset.v);
+          var t = c.textContent.trim().replace(',', '.');
+          var n = parseFloat(t);
+          return isNaN(n) ? t : n;
+        }}
+        Array.from(tb.querySelectorAll('tr'))
+          .sort(function (a, b) {{
+            var ka = key(a), kb = key(b);
+            if (typeof ka === 'string' || typeof kb === 'string')
+              return String(ka).localeCompare(String(kb)) * dir;
+            return (ka - kb) * dir;
+          }})
+          .forEach(function (tr) {{ tb.appendChild(tr); }});
+      }});
     }});
   }});
 }})();
