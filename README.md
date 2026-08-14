@@ -61,16 +61,25 @@ DP-urile 101–124 apar doar local (nu-s expuse în cloud); se loghează în col
 
 ## Limite ANRE / EN 50160 (referință reclamație)
 
-Nominal 230 V ±10% → **207–253 V**.
+Nominal 230 V ±10% → **207–253 V** (absolut: 195,5–253,0 V).
 
-Observat în **capturi din app Smart Life** (2026-08-12, 19:01–20:08 — dovadă slabă,
-de reprodus în CSV):
+Observat în **capturi din app Smart Life** (2026-08-12, 19:01–20:08 — dovadă slabă):
 - sub sarcină (~5 kW): faza A 178,2 V, faza B 175,2 V — **sub limită**
 - în gol: faza C 258,5 V — **peste limită**
 
-Măsurat de **logger în CSV** (dovadă tare): deocamdată doar sarcină mică, totul în
-limite; remarcabil o cădere de 13 V pe A/B la consum propriu constant (00:28→00:40).
-Obiectiv: prins încălcările în CSV la test de sarcină (duș / mașină de spălat vase).
+**Reprodus și depășit de logger în CSV (dovadă tare):**
+
+| Data/ora | Eveniment | Valori |
+|---|---|---|
+| 13.08 12:34 | supratensiune în gol | C = **254,8 V** |
+| 13.08 20:20 | sub sarcină 6,8 kW | A **179,3 V**, B **176,2 V** — sub limita absolută |
+| 14.08 09:51 | ardere centrală (log cloud) | B **173,5 V** la 28,0 A |
+| 14.08 09:57 | sarcină 12,6 kW | **toate 3 fazele sub 207 V** (201,0/197,4/205,0), 31,9 A pe B |
+| 14.08 10:09 | **record negativ**, doar 3,7 kW | **B = 153,4 V, A = 156,0 V** — cu 42 V sub limita absolută |
+| 14.08 10:52 | supratensiune în gol | C = **256,9 V** |
+
+Pendulare 153→257 V în aceeași dimineață. Istoricul există și în cloud-ul Tuya
+(~7 zile, API device logs) — probă independentă de CSV-ul local.
 
 Tipar de asimetrie (fazele încărcate cad, cea neîncărcată urcă) = probleme pe
 nul / branșament subdimensionat. Periculos pentru aparate. CSV-urile cu
