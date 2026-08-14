@@ -1,0 +1,19 @@
+[Unit]
+Description=Tuya monitor (contor trifazat + centrala) - logging CSV
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=%i
+WorkingDirectory=/opt/tuya
+Environment=PYTHONUNBUFFERED=1
+# 30s in loc de 10s: menajeaza cardul SD
+Environment=TUYA_CENTRALA_POLL=30
+ExecStart=/usr/bin/python3 /opt/tuya/monitor_local.py
+Restart=always
+RestartSec=10
+# monitorul e SINGURA conexiune la contor (v3.4 tine putine socketuri)
+
+[Install]
+WantedBy=multi-user.target

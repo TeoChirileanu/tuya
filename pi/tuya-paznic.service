@@ -1,0 +1,17 @@
+[Unit]
+Description=Tuya paznic de sarcina (comuta P1/P2/P3 sub plafon)
+After=tuya-monitor.service
+Wants=tuya-monitor.service
+
+[Service]
+Type=simple
+User=%i
+WorkingDirectory=/opt/tuya
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/bin/python3 /opt/tuya/paznic.py
+Restart=always
+RestartSec=15
+# citeste CSV-ul scris de monitor; daca monitorul e mort, nu ia decizii (STALE_S)
+
+[Install]
+WantedBy=multi-user.target

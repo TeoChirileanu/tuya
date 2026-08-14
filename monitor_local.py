@@ -31,7 +31,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 METER_ID = "bf8506716a850a2588yqqf"      # Contor Chiril  @ 192.168.1.230
 CENTRALA_ID = "bff7d8c541f12e011b5csd"   # Centrala munte @ 192.168.1.214
 
-CENTRALA_POLL = 10.0
+# pe Raspberry (card SD) pune TUYA_CENTRALA_POLL=30 sau 60 — la 10s ies
+# ~8.600 rânduri/zi, fiecare cu flush, ceea ce uzează cardul inutil
+CENTRALA_POLL = float(os.environ.get("TUYA_CENTRALA_POLL", 10.0))
 HEARTBEAT_EVERY = 9.0
 METER_STATUS_EVERY = 60.0  # keepalive + index
 
