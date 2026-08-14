@@ -16,6 +16,16 @@ sudo apt-get install -y python3-pip git
 echo "== 2. tinytuya =="
 pip3 install --break-system-packages --quiet tinytuya
 
+echo "== 2b. log2ram (tine /var/log in RAM — menajeaza cardul SD) =="
+if ! dpkg -s log2ram >/dev/null 2>&1; then
+    echo "deb [signed-by=/etc/apt/keyrings/azlux.gpg] http://packages.azlux.fr/debian/ stable main" \
+        | sudo tee /etc/apt/sources.list.d/azlux.list >/dev/null
+    sudo mkdir -p /etc/apt/keyrings
+    curl -fsSL https://azlux.fr/repo.gpg | sudo tee /etc/apt/keyrings/azlux.gpg >/dev/null
+    sudo apt-get update -qq && sudo apt-get install -y log2ram || \
+        echo "log2ram esuat — nu e critic, continui"
+fi
+
 echo "== 3. verificare config =="
 for f in devices.json tinytuya.json; do
     [[ -f "$REPO/$f" ]] || { echo "LIPSA $REPO/$f — copiaza-l manual"; exit 1; }
