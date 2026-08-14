@@ -1,0 +1,22 @@
+# --- SECRETE: chei cloud + local keys — NU se publică niciodată ---
+tinytuya.json
+devices.json
+snapshot.json
+tuya-raw.json
+
+# --- date măsurate + jurnale (locale) ---
+*.csv
+*.log
+
+# --- dosar personal (PII: reclamație, ATR, poze) ---
+RECLAMATIE.md
+INSTALATIE.md
+*.pdf
+*.jpeg
+*.jpg
+*.png
+*.mov
+
+# --- python ---
+__pycache__/
+*.pyc

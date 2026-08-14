@@ -1,0 +1,6 @@
+{
+    "apiKey": "ACCESS_ID_DIN_IOT_TUYA_COM",
+    "apiSecret": "ACCESS_SECRET_DIN_IOT_TUYA_COM",
+    "apiRegion": "eu",
+    "apiDeviceID": "ID_UNUI_DEVICE_DIN_CONT"
+}

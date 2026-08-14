@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Contor trifazat",
+    "id": "DEVICE_ID_CONTOR",
+    "key": "LOCAL_KEY_CONTOR",
+    "ip": "192.168.1.230",
+    "version": "3.4"
+  },
+  {
+    "name": "Centrala electrica",
+    "id": "DEVICE_ID_CENTRALA",
+    "key": "LOCAL_KEY_CENTRALA",
+    "ip": "192.168.1.214",
+    "version": "3.5"
+  }
+]
