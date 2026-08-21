@@ -10,7 +10,7 @@ oriunde, comenzile doar din rețeaua locală.
 ```python
 import json, tinytuya
 
-devices = {d["id"]: d for d in json.load(open(r"c:\repos\tuya\devices.json"))}
+devices = {d["id"]: d for d in json.load(open(r"c:\repos\tuya\config\devices.json"))}
 
 def device(dev_id):
     d = devices[dev_id]
@@ -27,7 +27,7 @@ status = centrala.status()      # citire
 
 ## Centrală JNOD BM326E — DP-uri (bff7d8c541f12e011b5csd)
 
-Confirmate prin corelarea log-urilor cu ecranele din app (pozele `setari-*.jpeg`):
+Confirmate prin corelarea log-urilor cu ecranele din app (pozele `dosar/setari-*.jpeg`):
 
 | DP | Semnificație | Tip / valori | R/W | Comandă exemplu |
 |---|---|---|---|---|

@@ -23,6 +23,9 @@ from datetime import datetime
 import tinytuya
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)          # radacina repo (scripturile stau in src/)
+DATA = os.path.join(ROOT, "data")     # CSV-urile zilnice
+CONFIG = os.path.join(ROOT, "config") # devices.json / tinytuya.json
 CENTRALA_ID = "bff7d8c541f12e011b5csd"
 
 # --- praguri ---
@@ -44,7 +47,7 @@ LEVELS = ["P1", "P2", "P3"]
 
 
 def centrala_dev():
-    with open(os.path.join(HERE, "devices.json"), encoding="utf-8") as f:
+    with open(os.path.join(CONFIG, "devices.json"), encoding="utf-8") as f:
         devices = json.load(f)
     info = next(d for d in devices if d["id"] == CENTRALA_ID)
     dev = tinytuya.Device(
@@ -55,7 +58,7 @@ def centrala_dev():
 
 
 def meter_csv_path():
-    return os.path.join(HERE, f"contor_{datetime.now():%Y%m%d}.csv")
+    return os.path.join(DATA, f"contor_{datetime.now():%Y%m%d}.csv")
 
 
 def read_new_rows(state):
@@ -92,7 +95,8 @@ def parse_row(row):
 def main():
     centrala = centrala_dev()
 
-    log_path = os.path.join(HERE, f"paznic_{datetime.now():%Y%m%d}.csv")
+    os.makedirs(DATA, exist_ok=True)
+    log_path = os.path.join(DATA, f"paznic_{datetime.now():%Y%m%d}.csv")
     new_file = not os.path.exists(log_path)
     lf = open(log_path, "a", newline="", encoding="utf-8")
     lw = csv.writer(lf)

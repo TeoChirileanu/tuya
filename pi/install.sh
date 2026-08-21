@@ -2,7 +2,7 @@
 # Instalare pe Raspberry Pi OS Lite (64-bit). Ruleaza ca utilizator normal, cu sudo.
 #   git clone https://github.com/TeoChirileanu/tuya.git /opt/tuya
 #   cd /opt/tuya && ./pi/install.sh
-# Inainte: copiaza devices.json si tinytuya.json in /opt/tuya (NU sunt in git).
+# Inainte: copiaza devices.json si tinytuya.json in /opt/tuya/config (NU sunt in git).
 set -euo pipefail
 
 USER_NAME="$(id -un)"
@@ -27,10 +27,10 @@ if ! dpkg -s log2ram >/dev/null 2>&1; then
 fi
 
 echo "== 3. verificare config =="
-for f in devices.json tinytuya.json; do
+for f in config/devices.json config/tinytuya.json; do
     [[ -f "$REPO/$f" ]] || { echo "LIPSA $REPO/$f — copiaza-l manual"; exit 1; }
 done
-chmod 600 "$REPO"/devices.json "$REPO"/tinytuya.json
+chmod 600 "$REPO"/config/devices.json "$REPO"/config/tinytuya.json
 
 echo "== 4. servicii systemd =="
 chmod +x "$REPO"/pi/*.sh
@@ -52,7 +52,7 @@ Gata. Comenzi utile:
   journalctl -u tuya-monitor -f        # log live monitor
   journalctl -u tuya-paznic -f         # log live paznic
   systemctl restart tuya-monitor       # repornire
-  tail -f /opt/tuya/contor_$(date +%Y%m%d).csv
+  tail -f /opt/tuya/data/contor_$(date +%Y%m%d).csv
 
 Pentru publicare automata pe GitHub trebuie o deploy key cu drept de write:
   ssh-keygen -t ed25519 -C "pi-chiril" -f ~/.ssh/id_ed25519 -N ""

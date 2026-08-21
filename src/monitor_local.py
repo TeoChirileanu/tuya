@@ -28,6 +28,9 @@ def sp(*args):
         pass
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)          # radacina repo (scripturile stau in src/)
+DATA = os.path.join(ROOT, "data")     # CSV-urile zilnice
+CONFIG = os.path.join(ROOT, "config") # devices.json / tinytuya.json
 METER_ID = "bf8506716a850a2588yqqf"      # Contor Chiril  @ 192.168.1.230
 CENTRALA_ID = "bff7d8c541f12e011b5csd"   # Centrala munte @ 192.168.1.214
 
@@ -56,7 +59,7 @@ def decode_phase(b64):
 
 
 def load_device(dev_id, persistent):
-    with open(os.path.join(HERE, "devices.json"), encoding="utf-8") as f:
+    with open(os.path.join(CONFIG, "devices.json"), encoding="utf-8") as f:
         devices = json.load(f)
     info = next(d for d in devices if d["id"] == dev_id)
     dev = tinytuya.Device(
@@ -84,7 +87,8 @@ class DailyCsv:
         if self.f:
             self.f.close()
         self.day = f"{datetime.now():%Y%m%d}"
-        path = os.path.join(HERE, f"{self.prefix}_{self.day}.csv")
+        os.makedirs(DATA, exist_ok=True)
+        path = os.path.join(DATA, f"{self.prefix}_{self.day}.csv")
         new = not os.path.exists(path)
         self.f = open(path, "a", newline="", encoding="utf-8")
         self.writer = csv.writer(self.f)

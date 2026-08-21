@@ -2,7 +2,7 @@
 
 Extragere date local (LAN) și prin cloud, log CSV pentru reclamația de calitate
 tensiune. Dosarul reclamației (nr. înregistrare, ATR, măsurători invocate,
-termene): [RECLAMATIE.md](RECLAMATIE.md).
+termene): [dosar/RECLAMATIE.md](dosar/RECLAMATIE.md).
 
 ## Device-uri
 
@@ -11,17 +11,38 @@ termene): [RECLAMATIE.md](RECLAMATIE.md).
 | Contor Chiril (trifazat) | `bf8506716a850a2588yqqf` | 192.168.1.230 | 3.4 |
 | Centrala munte | `bff7d8c541f12e011b5csd` | 192.168.1.214 | 3.5 |
 
-Config: `tinytuya.json` (chei cloud, regiune `eu` = Central Europe),
-`devices.json` (local keys + IP + versiune). Ambele generate — nu edita manual.
-IP-urile sunt DHCP — dacă se schimbă, rulează `python -m tinytuya scan` și
-actualizează `devices.json` (sau fă rezervări DHCP în router).
+Config în `config/`: `tinytuya.json` (chei cloud, regiune `eu` = Central Europe),
+`devices.json` (local keys + IP + versiune). Ambele generate — nu edita manual;
+`*.json.example` din același folder arată forma. IP-urile sunt DHCP — dacă se
+schimbă, rulează `python -m tinytuya scan` **din `config/`** (scrie `devices.json`
+în directorul curent) sau fă rezervări DHCP în router.
+
+## Structura repo
+
+| Cale | Conținut |
+|---|---|
+| `src/` | scripturile Python (monitor, paznic, generator de pagină) |
+| `win/` | rulare pe Windows: wrapperele + `install.ps1` (Scheduled Tasks) |
+| `pi/` | rulare pe Raspberry Pi: `install.sh` + unități systemd |
+| `config/` | `devices.json`, `tinytuya.json` (**secrete**, ignorate) + exemplele lor |
+| `data/` | CSV-urile zilnice (contor, centrală, paznic) — locale, ignorate de git |
+| `logs/` | jurnalele wrapperelor și watchdog-ului — locale, ignorate de git |
+| `dosar/` | **PII**: reclamația, ATR, pozele instalației, inventarul — ignorat de git |
+| `notite/` | documentație de lucru: comenzi Tuya, instalare Pi, kit monofazat |
+| `docs/` | `index.html` generat — sursa pentru GitHub Pages (public) |
+| `outputs/` | artefacte de scraping/lucru — locale, ignorate de git |
 
 ## Scripturi
 
 | Script | Ce face |
 |---|---|
-| `python monitor_local.py` | contor event-driven + centrală la 10s → `contor_YYYYMMDD.csv`, `centrala_YYYYMMDD.csv` |
-| `python monitor_cloud.py` | contor prin cloud la 10s → `cloud_log_YYYYMMDD.csv`; merge de oriunde |
+| `python src/monitor_local.py` | contor event-driven + centrală la 10s → `data/contor_YYYYMMDD.csv`, `data/centrala_YYYYMMDD.csv` |
+| `python src/monitor_cloud.py` | contor prin cloud la 10s → `data/cloud_log_YYYYMMDD.csv`; merge de oriunde |
+| `python src/paznic.py` | comută P1/P2/P3 sub plafon, citind CSV-ul monitorului → `data/paznic_YYYYMMDD.csv` |
+| `python src/gen_pagina.py` | regenerează `docs/index.html` (pagina publică de probe) din `data/contor_*.csv` |
+
+Rulare non-stop: pe Windows `pwsh -File win\install.ps1` (Scheduled Tasks), pe
+Raspberry Pi `./pi/install.sh` (systemd) — vezi [notite/PI.md](notite/PI.md).
 
 ## Comportament contor (important)
 
@@ -87,6 +108,6 @@ timestamp sunt proba.
 
 ## De făcut
 
-- [ ] Reset Key pe iot.tuya.com (secretul a apărut în screenshot) → actualizează `tinytuya.json`
+- [ ] Reset Key pe iot.tuya.com (secretul a apărut în screenshot) → actualizează `config/tinytuya.json`
 - [ ] Rezervări DHCP pentru .230 și .214 în router
-- [ ] Pentru logging non-stop: rulează `monitor_local.py` pe un calculator mereu pornit la munte
+- [ ] Pentru logging non-stop: rulează `src/monitor_local.py` pe un calculator mereu pornit la munte

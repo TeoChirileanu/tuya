@@ -1,6 +1,6 @@
 """Generează docs/index.html — pagina publică de probe pentru calitatea tensiunii.
 
-Citește toate contor_*.csv, construiește graficul V/timp pe faze (SVG inline),
+Citește toate data/contor_*.csv, construiește graficul V/timp pe faze (SVG inline),
 tabelul încălcărilor și statisticile. Fără date personale — doar măsurători.
 
 Utilizare:  python gen_pagina.py   (apoi commit + push -> GitHub Pages)
@@ -13,7 +13,9 @@ import os
 from datetime import datetime
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.join(HERE, "docs", "index.html")
+ROOT = os.path.dirname(HERE)          # radacina repo (scripturile stau in src/)
+DATA = os.path.join(ROOT, "data")
+OUT = os.path.join(ROOT, "docs", "index.html")
 
 V_LO, V_HI = 207.0, 253.0       # limite 95% (±10%)
 V_ABS_LO = 195.5                # limită absolută inferioară (−15%)
@@ -27,7 +29,7 @@ COLORS = {"L1": "var(--s1)", "L2": "var(--s2)", "L3": "var(--s3)"}
 
 def load_rows():
     rows = []
-    for path in sorted(glob.glob(os.path.join(HERE, "contor_*.csv"))):
+    for path in sorted(glob.glob(os.path.join(DATA, "contor_*.csv"))):
         with open(path, encoding="utf-8") as f:
             for r in csv.reader(f):
                 if not r or r[0] == "timestamp":
@@ -48,7 +50,7 @@ def fnum(v, dec=1):
 def main():
     rows = load_rows()
     if not rows:
-        raise SystemExit("niciun contor_*.csv găsit")
+        raise SystemExit("niciun data/contor_*.csv găsit")
 
     t0 = rows[0][0].timestamp()
     t1 = rows[-1][0].timestamp()

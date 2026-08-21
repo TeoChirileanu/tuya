@@ -8,7 +8,7 @@ Type=simple
 User=%i
 WorkingDirectory=/opt/tuya
 Environment=PYTHONUNBUFFERED=1
-ExecStart=/usr/bin/python3 /opt/tuya/paznic.py
+ExecStart=/usr/bin/python3 /opt/tuya/src/paznic.py
 Restart=always
 RestartSec=15
 # citeste CSV-ul scris de monitor; daca monitorul e mort, nu ia decizii (STALE_S)

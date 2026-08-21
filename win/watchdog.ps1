@@ -1,7 +1,8 @@
 # Watchdog: verifică monitor + paznic și repornește ce e mort/înțepenit.
-# Rulat de Scheduled Task "TuyaWatchdog" la fiecare 5 minute.
-Set-Location $PSScriptRoot
-$log = "watchdog.log"
+# Inregistrat ca Scheduled Task "TuyaWatchdog" (la 5 minute) de win\install.ps1.
+Set-Location (Split-Path $PSScriptRoot -Parent)
+New-Item -ItemType Directory -Force -Path logs | Out-Null
+$log = "logs\watchdog.log"
 $now = Get-Date -Format o
 
 function Restart-Stack {
@@ -23,7 +24,7 @@ $monitorAlive = ($procs | Where-Object { $_ -match "monitor_local" }) -ne $null
 $paznicAlive  = ($procs | Where-Object { $_ -match "paznic" }) -ne $null
 
 # centrala scrie rânduri la 10s -> fișierul zilei trebuie să fie proaspăt
-$centralaCsv = "centrala_$(Get-Date -Format yyyyMMdd).csv"
+$centralaCsv = "data\centrala_$(Get-Date -Format yyyyMMdd).csv"
 $fresh = (Test-Path $centralaCsv) -and
          ((Get-Date) - (Get-Item $centralaCsv).LastWriteTime).TotalMinutes -lt 5
 

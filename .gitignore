@@ -1,16 +1,17 @@
-# --- SECRETE: chei cloud + local keys — NU se publică niciodată ---
+# --- SECRETE: chei cloud + local keys (stau în config/) — NU se publică niciodată ---
 tinytuya.json
 devices.json
 snapshot.json
 tuya-raw.json
 
 # --- date măsurate + jurnale (locale) ---
+data/
+logs/
 *.csv
 *.log
 
-# --- dosar personal (PII: reclamație, ATR, poze) ---
-RECLAMATIE.md
-INSTALATIE.md
+# --- dosar personal (PII: reclamație, ATR, poze, inventar instalație) ---
+dosar/
 *.pdf
 *.jpeg
 *.jpg

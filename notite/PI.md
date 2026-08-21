@@ -48,11 +48,24 @@ câteva ore.
 
 ## 5. Instalare scripturi
 
+> **Dacă Pi-ul are deja repo-ul clonat de dinainte de reorganizare** (CSV-urile
+> stăteau direct în `/opt/tuya`), la primul `git pull` mută-le, altfel pagina de
+> probe pierde istoricul:
+> ```bash
+> sudo systemctl stop tuya-monitor tuya-paznic   # ÎNTÂI: altfel scriu mai departe
+> cd /opt/tuya && git pull                       #        în vechea cale (fd deschis)
+> mkdir -p data logs config
+> mv -n *.csv data/ 2>/dev/null; mv -n health.log logs/ 2>/dev/null
+> mv -n devices.json tinytuya.json config/ 2>/dev/null
+> ./pi/install.sh          # rescrie unitatile systemd (src/) si repornește serviciile
+> ```
+
 ```bash
 sudo git clone https://github.com/TeoChirileanu/tuya.git /opt/tuya
 sudo chown -R $USER:$USER /opt/tuya
 # copiază devices.json și tinytuya.json de pe laptop (NU sunt în git):
-#   scp devices.json tinytuya.json pi-chiril:/opt/tuya/
+#   ssh pi-chiril "mkdir -p /opt/tuya/config"
+#   scp config/devices.json config/tinytuya.json pi-chiril:/opt/tuya/config/
 cd /opt/tuya && ./pi/install.sh
 ```
 
@@ -83,7 +96,7 @@ De atunci, pagina de probe se actualizează singură din oră în oră.
 ```bash
 ssh -p 2222 teo@chiril.tplinkdns.com        # administrare
 journalctl -u tuya-monitor -f               # log live
-tail -f /opt/tuya/contor_$(date +%Y%m%d).csv
+tail -f /opt/tuya/data/contor_$(date +%Y%m%d).csv
 ```
 
 Pentru **citit măsurătorile nu ai nevoie de SSH** — pagina publică se

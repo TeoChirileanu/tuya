@@ -1,11 +1,11 @@
 """Polling prin Tuya Cloud API — merge de oriunde, fără acces LAN la contor.
 
-Necesită tinytuya.json (creat de wizard) cu apiKey/apiSecret/apiRegion.
+Necesită config/tinytuya.json (creat de wizard) cu apiKey/apiSecret/apiRegion.
 Interval implicit 10s (limite API cloud) — pentru 1s folosește monitor_local.py.
 
 Utilizare:
-    python monitor_cloud.py                # auto-detectează contorul
-    python monitor_cloud.py <device_id>    # sau explicit
+    python src/monitor_cloud.py                # auto-detectează contorul
+    python src/monitor_cloud.py <device_id>    # sau explicit
 """
 
 import base64
@@ -19,7 +19,10 @@ from datetime import datetime
 import tinytuya
 
 POLL_SECONDS = 10.0
-HERE = os.path.dirname(__file__)
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)          # radacina repo (scripturile stau in src/)
+DATA = os.path.join(ROOT, "data")     # CSV-urile zilnice
+CONFIG = os.path.join(ROOT, "config") # tinytuya.json (chei cloud)
 METER_ID = "bf8506716a850a2588yqqf"  # Contor Chiril (implicit)
 
 PHASE_CODES = ("phase_a", "phase_b", "phase_c")
@@ -42,12 +45,20 @@ def decode_phase(value: str):
 
 
 def main():
-    cloud = tinytuya.Cloud()  # citește tinytuya.json automat
+    with open(os.path.join(CONFIG, "tinytuya.json"), encoding="utf-8") as f:
+        creds = json.load(f)
+    cloud = tinytuya.Cloud(
+        apiRegion=creds["apiRegion"],
+        apiKey=creds["apiKey"],
+        apiSecret=creds["apiSecret"],
+        apiDeviceID=creds.get("apiDeviceID"),
+    )
 
     dev_id = sys.argv[1] if len(sys.argv) > 1 else METER_ID
     print(f"Contor: id={dev_id}")
 
-    log_path = os.path.join(HERE, f"cloud_log_{datetime.now():%Y%m%d}.csv")
+    os.makedirs(DATA, exist_ok=True)
+    log_path = os.path.join(DATA, f"cloud_log_{datetime.now():%Y%m%d}.csv")
     new_file = not os.path.exists(log_path)
     with open(log_path, "a", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
