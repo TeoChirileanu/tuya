@@ -20,3 +20,7 @@ INSTALATIE.md
 # --- python ---
 __pycache__/
 *.pyc
+
+# --- artefacte locale de lucru (profil browser, cookies, scraping) ---
+outputs/
+.claude/
