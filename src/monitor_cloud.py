@@ -6,6 +6,8 @@ Interval implicit 10s (limite API cloud) — pentru 1s folosește monitor_local.
 Utilizare:
     python src/monitor_cloud.py                # auto-detectează contorul
     python src/monitor_cloud.py <device_id>    # sau explicit
+    python src/monitor_cloud.py <device_id> <eticheta>
+        # fișierul devine cloud_log_<eticheta>_YYYYMMDD.csv (instanțe paralele)
 """
 
 import base64
@@ -55,10 +57,12 @@ def main():
     )
 
     dev_id = sys.argv[1] if len(sys.argv) > 1 else METER_ID
-    print(f"Contor: id={dev_id}")
+    label = sys.argv[2] if len(sys.argv) > 2 else ""
+    print(f"Contor: id={dev_id}" + (f" ({label})" if label else ""))
 
     os.makedirs(DATA, exist_ok=True)
-    log_path = os.path.join(DATA, f"cloud_log_{datetime.now():%Y%m%d}.csv")
+    prefix = f"cloud_log_{label}_" if label else "cloud_log_"
+    log_path = os.path.join(DATA, f"{prefix}{datetime.now():%Y%m%d}.csv")
     new_file = not os.path.exists(log_path)
     with open(log_path, "a", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)

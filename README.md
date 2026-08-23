@@ -24,12 +24,13 @@ schimbă, rulează `python -m tinytuya scan` **din `config/`** (scrie `devices.j
 | `src/` | scripturile Python (monitor, paznic, generator de pagină) |
 | `win/` | rulare pe Windows: wrapperele + `install.ps1` (Scheduled Tasks) |
 | `pi/` | rulare pe Raspberry Pi: `install.sh` + unități systemd |
+| `wrt/` | rulare pe routerul OpenWrt (GL-BE6500): `install.sh` + servicii procd + `publish.sh` (cron) |
 | `config/` | `devices.json`, `tinytuya.json` (**secrete**, ignorate) + exemplele lor |
 | `data/` | CSV-urile zilnice (contor, centrală, paznic) — locale, ignorate de git |
 | `logs/` | jurnalele wrapperelor și watchdog-ului — locale, ignorate de git |
 | `dosar/` | **PII**: reclamația, ATR, pozele instalației, inventarul — ignorat de git |
 | `notite/` | documentație de lucru: comenzi Tuya, instalare Pi, kit monofazat |
-| `docs/` | `index.html` generat — sursa pentru GitHub Pages (public) |
+| `docs/` | paginile generate (hub `index.html` + `chiril/` + `martiniuc/`) — sursa pentru GitHub Pages (public) |
 | `outputs/` | artefacte de scraping/lucru — locale, ignorate de git |
 
 ## Scripturi
@@ -37,12 +38,14 @@ schimbă, rulează `python -m tinytuya scan` **din `config/`** (scrie `devices.j
 | Script | Ce face |
 |---|---|
 | `python src/monitor_local.py` | contor event-driven + centrală la 10s → `data/contor_YYYYMMDD.csv`, `data/centrala_YYYYMMDD.csv` |
-| `python src/monitor_cloud.py` | contor prin cloud la 10s → `data/cloud_log_YYYYMMDD.csv`; merge de oriunde |
+| `python src/monitor_cloud.py [device_id [eticheta]]` | contor prin cloud la 10s → `data/cloud_log[_eticheta]_YYYYMMDD.csv`; merge de oriunde |
 | `python src/paznic.py` | comută P1/P2/P3 sub plafon, citind CSV-ul monitorului → `data/paznic_YYYYMMDD.csv` |
-| `python src/gen_pagina.py` | regenerează `docs/index.html` (pagina publică de probe) din `data/contor_*.csv` |
+| `python src/gen_pagina.py [punct\|all]` | regenerează `docs/<punct>/index.html` + hub-ul `docs/index.html` din `data/contor_*.csv` + `data/cloud_log_<punct>_*.csv`; afișare la 10 min + toate încălcările |
 
 Rulare non-stop: pe Windows `pwsh -File win\install.ps1` (Scheduled Tasks), pe
-Raspberry Pi `./pi/install.sh` (systemd) — vezi [notite/PI.md](notite/PI.md).
+Raspberry Pi `./pi/install.sh` (systemd) — vezi [notite/PI.md](notite/PI.md) — și pe
+routerul OpenWrt GL-BE6500 `./wrt/install.sh` (procd: monitoare cloud Chiril +
+Martiniuc; cron: publicare orară a paginilor cu `wrt/publish.sh`).
 
 ## Comportament contor (important)
 
