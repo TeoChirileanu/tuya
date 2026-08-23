@@ -12,7 +12,7 @@ cd "$(dirname "$0")/.."
 
 echo "== 1. pachete pe router =="
 ssh "$ROUTER" 'opkg update && opkg install python3-light python3-pip ca-bundle \
-               git openssh-client openssh-keygen'
+               git git-http openssh-client openssh-keygen'
 
 echo "== 2. tinytuya =="
 # --no-deps: cryptography (dep. declarată) nu are wheel pentru musl/aarch64;
